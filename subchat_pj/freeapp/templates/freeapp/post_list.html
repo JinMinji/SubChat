@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'freeapp/post.css' %}">
+
+<h2 style="text-align:center; padding: 10px 0px 0px 0px;"> 호선 게시글 목록 화면 &#127817;</h2>
+
+<ul id="post_menu" style="list-style-type: none;">
+    <li style="float:right; text-align:center;"><a href="{% url 'free:create' %}">글쓰기&#9997;</a></li>
+</ul>
+<table id="post_table">
+    <tr>
+        <th>no</th>
+        <th>질문</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>답변</th>
+        <th>신고</th>
+        <th>조회수</th>
+    </tr>
+    {% for post in post_list%}
+    <tr>
+        <td><a href="{% url 'free:post' post.id %}">{{post.id}}</a></td>
+        <td style="text-align:left; min-width:300px">
+            <span><strong>{{post.title}}</strong></span>
+            <br><span>{{post.contents}}</span>
+        </td>
+        <td>{{post.author}}</td>
+        <td style="max-width:100px">{{post.create_date|date:'Y-m-d H:i'}}</td>
+        <td>댓글수</td>
+        <td>&#128529; : {{post.report_cnt}}</td>
+        <td>{{post.view_cnt}}</td>
+    </tr>
+    {%endfor%}
+</table>
+
+{% endblock %}

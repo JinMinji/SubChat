@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'freeapp/post_read.css' %}">
+<div>
+	<h3 style="text-align:center;"> 글 읽기 </h3>
+</div>
+<div id="post">
+	<form method="post" action=".">
+		<div style="float:right">
+			<label>작성자 : </label>
+			<span>{{post.author}}</span>
+		</div>
+		<div>
+			<p>조회수 : {{post.view_cnt}}</p>
+		</div>
+		<div>
+<!--			<label>글 제목 : </label>-->
+			<label>{{post.title}}</label>
+		</div>
+
+		<div>
+<!--			<label>글 내용 : </label>-->
+			<label>{{post.contents}}</label>
+		</div>
+
+		<button type="submit">글쓰기</button>
+		<button type="button" onclick="location.href='/ask/list/'">돌아가기</button>
+
+	</form>
+</div>
+{% endblock %}

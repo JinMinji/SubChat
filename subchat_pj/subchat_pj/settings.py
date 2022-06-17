@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'common',
     'main',
     'accounts',
     'chatapp',
@@ -55,6 +56,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'subchat_pj.urls'
+LOGIN_REDIRECT_URL = "/free/list"
+LOGOUT_REDIRECT_URL = "/free/list"
 
 TEMPLATES = [
     {
