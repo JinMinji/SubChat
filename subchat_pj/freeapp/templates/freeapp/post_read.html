@@ -24,9 +24,20 @@
 			<label>{{post.contents}}</label>
 		</div>
 
-		<button type="submit">글쓰기</button>
-		<button type="button" onclick="location.href='/ask/list/'">돌아가기</button>
+		{% if user.id == post.author_id%}
+			<button type="button" onclick="location.href='/free/modify/{{post.id}}'">수정하기{{post.id}}</button>
+			<button type="button" onclick="location.href='/free/list/'">삭제하기</button>
+		{% else %}
+			{% if user.is_authenticated %}
+			<button type="button" onclick="location.href='/free/list/'">신고하기</button>
+			{% endif %}
+		{% endif %}
+
+		<button type="button" onclick="location.href='/free/list/'">돌아가기</button>
 
 	</form>
 </div>
+
+{% include 'freeapp/comment.html' post.id %}
+
 {% endblock %}

@@ -1,0 +1,25 @@
+ul.pagination {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: transparent;
+  text-align: center;
+}
+li.page-item {
+  border-right:1px solid #bbb;
+  display:inline-block;
+}
+li.page-item:last-child {
+  border-right: none;
+}
+li.page-item a {
+  display: block;
+  color: red;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+li.page-item a:hover:not(.active) {
+  background-color: #111;
+}
