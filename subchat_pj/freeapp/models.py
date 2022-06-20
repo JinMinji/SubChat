@@ -25,7 +25,7 @@ class Bookmark(models.Model):
 
 
 class Comment(models.Model):
-    post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     contents = models.TextField()
     create_date = models.DateTimeField(auto_now_add=True)
     last_update_date = models.DateTimeField(auto_now_add=True)

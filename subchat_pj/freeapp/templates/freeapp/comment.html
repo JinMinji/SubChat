@@ -1,0 +1,27 @@
+<div>
+    <h3> 댓글 </h3>
+    {% for comment in comment_list %}
+    <div>
+    <h4>{{comment.author}}</h4>
+    <h4>{{comment.contents}}</h4>
+    </div>
+    <label>{{comment.contents}}</label>
+
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <div id="commentform">
+        <form method="post" action=".">
+		{% csrf_token %}
+		{% include "form_errors.html" %}
+		<div>
+			<textarea placeholder="내용을 입력하세요." name="c_contents" id="c_contents"></textarea>
+		</div>
+		<button type="submit">작성하기</button>
+	</form>
+
+    </div>
+    {% endif %}
+
+</div>
+

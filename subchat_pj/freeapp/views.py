@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 from django.utils import timezone
+from django.db.models import Q
+
 # Create your views here.
 
 class PostList(ListView):
@@ -29,11 +31,26 @@ class PostList(ListView):
         return context
 
 
-def post(request, pk):
-    post = Post.objects.get(id=pk)
-    post.view_cnt += 1
-    post.save()
-    return render(request, 'freeapp/post_read.html', {'post': post})
+def post(request, pk):  #게시글 내용 보여주는 곳
+    if request.method == "POST":
+        # 글쓰기
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)   #댓글 쓰는 부분
+            comment.author = request.user
+            comment.post_id = pk
+            comment.save()
+            print("test--------!")
+            return redirect("free:post", pk)
+
+    else:
+        post = Post.objects.get(id=pk)
+        post.view_cnt += 1
+        post.save()
+        qs = Comment.objects.all()
+        comments = qs.filter(Q(post_id=pk))
+
+    return render(request, 'freeapp/post_read.html', {'post': post, 'comment_list': comments})
 
 
 def create(request):
@@ -70,6 +87,14 @@ def modify(request, pk):
     return render(request, 'freeapp/modify.html', {'form': form, 'post': original_post})
 
 
-def delete(request):
-    return
+def delete(request, pk):
+    post = Post.objects.get(id=pk)
+    post.delete()
+    return redirect('/free/list')
 
+
+def comment_delete(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    tmp_post_id = comment.post_id
+    comment.delete()
+    return redirect('free:post', tmp_post_id)
