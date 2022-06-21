@@ -43,8 +43,8 @@
             <th>조회수</th>
         </tr>
         {% for post in post_list%}
-        <tr>
-            <td><a href="{% url 'free:post' post.id %}">{{post.id}}</a></td>
+        <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer">
+            <td>{{post.id}}</td>
             <td style="text-align:left; min-width:250px">
                 <span><strong>{{post.title}}</strong></span>
                 <br><span>{{post.contents}}</span>

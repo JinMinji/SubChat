@@ -28,13 +28,16 @@
 				<button type="button" onclick="location.href='/free/delete/{{post.id}}'">삭제하기</button>
 			{% else %}
 				{% if user.is_authenticated %}
-				<button type="button" onclick="location.href='/free/list/'">신고하기</button>
+				<button type="button" onclick="location.href='{% url 'free:report' post.id %}'">신고하기</button>
 				{% endif %}
 			{% endif %}
 
 			{% if user.is_authenticated%}
-				{% if  %}
-				<button type="button" onclick="location.href='/free/delete/{{post.id}}'">북마크</button>
+				{% if bookmark %}
+				<button type="button" onclick="location.href='{% url 'free:bookmark' post.id %}'">★</button>
+				{% else %}
+				<button type="button" onclick="location.href='{% url 'free:bookmark' post.id %}'">☆</button>
+				{% endif %}
 			{% endif %}
 			<button type="button" onclick="location.href='/free/list/'">돌아가기</button>
 		</form>

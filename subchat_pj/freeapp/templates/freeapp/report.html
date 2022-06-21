@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'freeapp/post_read.css' %}">
+<div class = "readpost">
+	<div class="container d-flex justify-content-center">
+		<h2 style="text-align:center;"> 신고하기 </h2>
+	</div>
+</div>
+<div>
+    <h3>신고 내용</h3>
+    <input type="radio" name="choice" id="1" value="">욕설
+    <input type="radio" name="choice" id="2" value="">욕설
+    <input type="radio" name="choice" id="3" value="">욕설
+    <input type="radio" name="choice" id="4" value="">욕설
+    <input type="radio" name="choice" id="5" value="">욕설
+</div>
+{% endblock %}

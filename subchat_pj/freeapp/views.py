@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
-from .models import Post, Comment, Bookmark
+from .models import Post, Comment, Bookmark, Report
 from .forms import PostForm, CommentForm
 from django.utils import timezone
 from django.db.models import Q
@@ -63,8 +63,8 @@ def post(request, pk):  #게시글 내용 보여주는 곳
     post.save()
     qs = Comment.objects.all()
     comments = qs.filter(Q(post_id=pk))
-    user_info = Bookmark.objects.get(user_id=request.user.id)
-    tmp = user_info.filter(post_id=pk)
+    bookmarks = Bookmark.objects.all()
+    tmp = bookmarks.filter(post_id=pk, user_id=request.user.id)
     bookmark = False
     if tmp:
         bookmark = True
@@ -132,9 +132,39 @@ def list(request):
             else:
                 messages.error(request, '검색어는 2글자 이상 입력해주세요.')
 
-
     post_list = Post.objects.all().order_by("-id")
 
     return render(request, 'freeapp/post_list.html', {'post_list': post_list})
 
 
+def bookmark(request, pk):
+    bookmarks = Bookmark.objects.all()
+    tmp = bookmarks.filter(post_id=pk, user_id=request.user.id)
+    if tmp:
+        tmp.delete()
+    else:
+        new_bookmark = Bookmark()
+        new_bookmark.post_id = pk
+        new_bookmark.user_id = request.user.id
+        new_bookmark.save()
+
+    return redirect('free:post', pk)
+
+
+def report(request, pk):
+    if request.method == "POST":
+        report = Report.objects.all()
+        tmp = report.filter(post_id=pk, user_id=request.user.id)
+
+        if tmp:
+            tmp.delete()
+        else:
+            new_bookmark = Bookmark()
+            new_bookmark.post_id = pk
+            new_bookmark.user_id = request.user.id
+            new_bookmark.save()
+
+        return redirect('free:post', pk)
+
+    else:
+        return render(request, 'freeapp/report.html')
