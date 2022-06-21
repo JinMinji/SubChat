@@ -57,7 +57,6 @@
 		{% endif %}
     {% endfor %}
 
-    {% if user.is_authenticated %}
     <div id="commentform">
 		<form method="post" action="./{{post.id}}">
 			{% csrf_token %}
@@ -65,10 +64,15 @@
 			<div>
 				<textarea placeholder="내용을 입력하세요." name="contents" id="contents"></textarea>
 			</div>
-			<button type="submit">작성하기</button>
+			{% if user.is_authenticated %}
+				<button type="submit">작성하기</button>
+			{% else %}
+				<button type="button" onclick="location.href='{% url 'accounts:login' %}'">작성하기</button>
+			{% endif %}
 		</form>
     </div>
-    {% endif %}
+
+
 
 </div>
 
