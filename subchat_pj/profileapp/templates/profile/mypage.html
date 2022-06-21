@@ -1,6 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<div class="mypage">
+    <h1>개인정보</h1>
+    <p>{{user}}</p>
+    <p>{{user.birth}}</p>
+    <p>{{user.email}}</p>
 
+    <span>내가 쓴 글</span>
+    <div class = "container d-flex justify-content-center">
+        <table style = "width: 100%; text-align:center;">
+            <tr>
+                <th>no</th>
+                <th>질문</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>답변</th>
+                <th>신고</th>
+                <th>조회수</th>
+            </tr>
+            {% for post in my_post_list%}
+                <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer">
+                    <td>{{post.id}}</td>
+                    <td style="text-align:left; min-width:250px">
+                        <span><strong>{{post.title}}</strong></span>
+                        <br><span>{{post.contents}}</span>
+                    </td>
+                    <td>{{post.author}}</td>
+                    <td style="max-width:100px">{{post.create_date|date:'Y-m-d H:i'}}</td>
+                    <td>댓글수</td>
+                    <td>&#128529; : {{post.report_cnt}}</td>
+                    <td>{{post.view_cnt}}</td>
+                </tr>
+            {%endfor%}
+        </table>
+    </div>
+
+
+    <span>북마크한 글</span>
+    <div class = "container d-flex justify-content-center">
+        <table style = "width: 100%; text-align:center;">
+            <tr>
+                <th>no</th>
+                <th>질문</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>답변</th>
+                <th>신고</th>
+                <th>조회수</th>
+            </tr>
+            {% for post in my_bookmark_list%}
+                <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer">
+                    <td>{{post.id}}</td>
+                    <td style="text-align:left; min-width:250px">
+                        <span><strong>{{post.title}}</strong></span>
+                        <br><span>{{post.contents}}</span>
+                    </td>
+                    <td>{{post.author}}</td>
+                    <td style="max-width:100px">{{post.create_date|date:'Y-m-d H:i'}}</td>
+                    <td>댓글수</td>
+                    <td>&#128529; : {{post.report_cnt}}</td>
+                    <td>{{post.view_cnt}}</td>
+                </tr>
+            {%endfor%}
+        </table>
+    </div>
+</div>
 
 {% endblock %}
