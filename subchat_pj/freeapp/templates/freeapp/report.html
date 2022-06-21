@@ -1,18 +1,35 @@
-{% extends 'base.html' %}
-{% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'freeapp/post_read.css' %}">
-<div class = "readpost">
-	<div class="container d-flex justify-content-center">
-		<h2 style="text-align:center;"> 신고하기 </h2>
-	</div>
+
+<div id="reportform">
+	<form method="post" action=".">
+		{% csrf_token %}
+		<div class="container d-flex justify-content-center">
+			<h2 style="text-align:center;"> 신고하기 </h2>
+		</div>
+
+		<div>
+			<h3>게시글 작성자 : {{post.author}}</h3>
+			<h3>게시글 제목 : {{post.title}}</h3>
+			<h3>게시글 내용 : </h3> <p>{{post.contents}}</p>
+		</div>
+
+		<div>
+			<h3>신고자 : {{user}}</h3>
+
+			<p><strong class="reason_title">사유선택</strong></p>
+			<div>
+				<input type="radio" name="report_reason" id="0">욕설/비방<br>
+				<input type="radio" name="report_reason" id="1">반복된 게시물<br>
+				<input type="radio" name="report_reason" id="2">음란 게시물<br>
+				<input type="radio" name="report_reason" id="3">광고성 게시물<br>
+				<input type="radio" name="report_reason" id="4">기타<br>
+			</div>
+		</div>
+
+		<div>
+			<button type="submit">신고하기</button>
+			<button type="button" onclick="window.close()">닫기</button>
+		</div>
+	</form>
 </div>
-<div>
-    <h3>신고 내용</h3>
-    <input type="radio" name="choice" id="1" value="">욕설
-    <input type="radio" name="choice" id="2" value="">욕설
-    <input type="radio" name="choice" id="3" value="">욕설
-    <input type="radio" name="choice" id="4" value="">욕설
-    <input type="radio" name="choice" id="5" value="">욕설
-</div>
-{% endblock %}

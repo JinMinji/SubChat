@@ -152,19 +152,26 @@ def bookmark(request, pk):
 
 
 def report(request, pk):
+    reported_post = Post.objects.get(id=pk)
     if request.method == "POST":
         report = Report.objects.all()
         tmp = report.filter(post_id=pk, user_id=request.user.id)
-
         if tmp:
-            tmp.delete()
-        else:
-            new_bookmark = Bookmark()
-            new_bookmark.post_id = pk
-            new_bookmark.user_id = request.user.id
-            new_bookmark.save()
+            messages.error(request, "이미 신고 완료한 게시글입니다.")
+            return render(request, 'freeapp/report_unable.html')
 
-        return redirect('free:post', pk)
+        else:
+            #신고 객체 추가
+            new_report = Report()
+            new_report.post_id = pk
+            new_report.user_id = request.user.id
+            new_report.save()
+            # 신고 대상 포스트의 신고건수 + 1
+            reported_post.report_cnt += 1
+            reported_post.save()
+            messages.warning(request, "신고가 완료되었습니다.")
+
+        return render(request, 'freeapp/report_close.html')
 
     else:
-        return render(request, 'freeapp/report.html')
+        return render(request, 'freeapp/report.html', {'post': reported_post})
