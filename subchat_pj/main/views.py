@@ -1,5 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
+from chatapp.models import Room
 
 
 def main(request):
-    return render(request, "main/main.html")
+    rooms = Room.objects.all()
+    return render(request, 'chatapp/main.html', {'rooms': rooms})
