@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'chatapp',
     'freeapp',
     'profileapp',
+    'channels',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +79,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'subchat_pj.wsgi.application'
-
+ASGI_APPLICATION = 'subchat_pj.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        ## wi-fi
+        # "BACKEND": "channels.layers.InMemoryChannelLayer",
+        # LAN
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        'CONFIG':{
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
