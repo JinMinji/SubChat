@@ -57,8 +57,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'subchat_pj.urls'
 
-LOGIN_REDIRECT_URL = "/free/list"
-LOGOUT_REDIRECT_URL = "/free/list"
+LOGIN_REDIRECT_URL = "/main/"
+LOGOUT_REDIRECT_URL = "/main/"
 
 TEMPLATES = [
     {

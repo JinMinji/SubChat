@@ -2,71 +2,69 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'freeapp/post_read.css' %}">
-<div>
-	<h3 style="text-align:center;"> 글 읽기 </h3>
-</div>
-<div id="post">
-	<form method="post" action=".">
-		<div style="float:right">
-			<label>작성자 : </label>
-			<span>{{post.author}}</span>
-		</div>
-		<div>
-			<p>조회수 : {{post.view_cnt}}</p>
-		</div>
-		<button onclick="#">북마크하기</button>
-		<div>
+<div class = "readpost">
+	<div class="container d-flex justify-content-center">
+		<h2 style="text-align:center;"> 글 읽기 </h2>
+	</div>
+
+	<div id="post" >
+		<form method="post" action=".">
+			<div style="float:right">
+				<label>작성자 : </label>
+				<span>{{post.author}}</span>
+			</div>
+			<div>
+				<p>조회수 : {{post.view_cnt}}</p>
+			</div>
 <!--			<label>글 제목 : </label>-->
 			<label>{{post.title}}</label>
-		</div>
+			<div>
+		<!--			<label>글 내용 : </label>-->
+				<label>{{post.contents}}</label>
+			</div>
 
-		<div>
-<!--			<label>글 내용 : </label>-->
-			<label>{{post.contents}}</label>
-		</div>
-
-		{% if user.id == post.author_id%}
-			<button type="button" onclick="location.href='/free/modify/{{post.id}}'">수정하기{{post.id}}</button>
-			<button type="button" onclick="location.href='/free/delete/{{post.id}}'">삭제하기</button>
-		{% else %}
-			{% if user.is_authenticated %}
-			<button type="button" onclick="location.href='/free/list/'">신고하기</button>
+			{% if user.id == post.author_id%}
+				<button type="button" onclick="location.href='/free/modify/{{post.id}}'">수정하기</button>
+				<button type="button" onclick="location.href='/free/delete/{{post.id}}'">삭제하기</button>
+			{% else %}
+				{% if user.is_authenticated %}
+				<button type="button" onclick="location.href='/free/list/'">신고하기</button>
+				{% endif %}
 			{% endif %}
-		{% endif %}
-
-		<button type="button" onclick="location.href='/free/list/'">돌아가기</button>
-
-	</form>
+			<button type="button" onclick="location.href='/free/list/'">돌아가기</button>
+		</form>
+	</div>
 </div>
 
 <div>
     <h3> 댓글 </h3>
     {% for comment in comment_list %}
-    <div>
-    <h4>{{comment.author}}</h4>
-    <h4>{{comment.contents}}</h4>
-    </div>
-    <label>{{comment.create_date}}</label>
-	{% if comment.author_id == user.id %}
-		<a href="{% url 'free:comment_delete' comment.id %}">삭제</a>
-	{% endif %}
-
+		<div>
+			<h4>{{comment.author}}</h4>
+			<h4>{{comment.contents}}</h4>
+		</div>
+		<label>{{comment.create_date}}</label>
+		{% if comment.author_id == user.id %}
+			<a href="{% url 'free:comment_delete' comment.id %}">삭제</a>
+		{% endif %}
     {% endfor %}
 
     {% if user.is_authenticated %}
     <div id="commentform">
-        <form method="post" action="./{{post.id}}">
-		{% csrf_token %}
-		{% include "form_errors.html" %}
-		<div>
-			<textarea placeholder="내용을 입력하세요." name="contents" id="contents"></textarea>
-		</div>
-		<button type="submit">작성하기</button>
-	</form>
-
+		<form method="post" action="./{{post.id}}">
+			{% csrf_token %}
+			{% include "form_errors.html" %}
+			<div>
+				<textarea placeholder="내용을 입력하세요." name="contents" id="contents"></textarea>
+			</div>
+			<button type="submit">작성하기</button>
+		</form>
     </div>
     {% endif %}
 
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 {% endblock %}
