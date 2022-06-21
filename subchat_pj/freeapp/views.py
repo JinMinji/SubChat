@@ -1,15 +1,30 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from .models import Post, Comment
+from .models import Post, Comment, Bookmark
 from .forms import PostForm, CommentForm
 from django.utils import timezone
 from django.db.models import Q
+from django.contrib import messages
 
 # Create your views here.
+
 
 class PostList(ListView):
     model = Post
     paginate_by = 10    # 페이지 나누는 부분
+
+    def get_queryset(self):
+        search_keyword = self.request.GET.get("searchword")
+        post_list = Post.objects.all().order_by("-id")
+        if search_keyword:
+            if len(search_keyword) > 1:
+                searched_list = post_list.filter(Q(title__icontains=search_keyword) | Q(contents__icontains=search_keyword))
+                return searched_list
+
+            else:
+                messages.error(self.request, '검색어는 2글자 이상 입력해주세요.')
+
+        return post_list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -43,14 +58,18 @@ def post(request, pk):  #게시글 내용 보여주는 곳
             print("test--------!")
             return redirect("free:post", pk)
 
-    else:
-        post = Post.objects.get(id=pk)
-        post.view_cnt += 1
-        post.save()
-        qs = Comment.objects.all()
-        comments = qs.filter(Q(post_id=pk))
+    post = Post.objects.get(id=pk)
+    post.view_cnt += 1
+    post.save()
+    qs = Comment.objects.all()
+    comments = qs.filter(Q(post_id=pk))
+    user_info = Bookmark.objects.get(user_id=request.user.id)
+    tmp = user_info.filter(post_id=pk)
+    bookmark = False
+    if tmp:
+        bookmark = True
 
-    return render(request, 'freeapp/post_read.html', {'post': post, 'comment_list': comments})
+    return render(request, 'freeapp/post_read.html', {'post': post, 'comment_list': comments, 'bookmark': bookmark})
 
 
 def create(request):
@@ -98,3 +117,24 @@ def comment_delete(request, comment_id):
     tmp_post_id = comment.post_id
     comment.delete()
     return redirect('free:post', tmp_post_id)
+
+
+def list(request):
+    if request.method == "POST":
+        search_keyword = request.POST.get("searchword")
+        post_list = Post.objects.all().order_by("-id")
+
+        if search_keyword:
+            if len(search_keyword) > 1:
+                searched_list = post_list.filter(Q(title__icontains=search_keyword) | Q(contents__icontains=search_keyword))
+                return render(request, 'freeapp/post_list.html', {'post_list': searched_list})
+
+            else:
+                messages.error(request, '검색어는 2글자 이상 입력해주세요.')
+
+
+    post_list = Post.objects.all().order_by("-id")
+
+    return render(request, 'freeapp/post_list.html', {'post_list': post_list})
+
+

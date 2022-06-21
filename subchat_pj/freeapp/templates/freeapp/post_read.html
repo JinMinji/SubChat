@@ -31,6 +31,11 @@
 				<button type="button" onclick="location.href='/free/list/'">신고하기</button>
 				{% endif %}
 			{% endif %}
+
+			{% if user.is_authenticated%}
+				{% if  %}
+				<button type="button" onclick="location.href='/free/delete/{{post.id}}'">북마크</button>
+			{% endif %}
 			<button type="button" onclick="location.href='/free/list/'">돌아가기</button>
 		</form>
 	</div>
@@ -63,7 +68,6 @@
     {% endif %}
 
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
