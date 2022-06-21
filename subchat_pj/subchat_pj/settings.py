@@ -56,6 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'subchat_pj.urls'
+
 LOGIN_REDIRECT_URL = "/free/list"
 LOGOUT_REDIRECT_URL = "/free/list"
 
@@ -100,6 +101,7 @@ DATABASES = {
     }
 }
 
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -117,6 +119,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'accounts.User'   #유저모델 커스터마이징에 따라 추가된 코드
 
 
 # Internationalization
