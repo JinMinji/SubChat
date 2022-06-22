@@ -3,108 +3,108 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'profileapp/mypage.css' %}">
 <body></body>
-<div class="mypage">
-    <div class = "page" >
-        <div class="page2">
-            <div class="box" style="background: #BDBDBD;">
-                <img class="profile" >
+    <div class="mypage">
+        <div class = "page" >
+            <div class="page2">
+                <div class="box" style="background: #BDBDBD;">
+                    <img class="profile" >
+                </div>
+                    <h1 style="text-align: center;">{{user}} Page</h1>
             </div>
-                <h1 style="text-align: center;">{{user}} Page</h1>
         </div>
-    </div>
 
-    <div>
-        <button class = "modifybar" type = "button">
-            <a href = "#">수정</a>
-        </button>
-    </div>
-    <div>
-        <button class = "savebar" type = "button">
-            <a href = "#">저장</a>
-        </button>
-    </div>
-
-    <div class = "aside" >
-        <div class = "box1">
-        <p>아이디</p>
-        <input type="text" name="username" id="username" value="" class="form-control input-lg" placeholder="{{user}}">
+        <div>
+            <button class = "modifybar" type = "button">
+                <a href = "#">수정</a>
+            </button>
+        </div>
+        <div>
+            <button class = "savebar" type = "button">
+                <a href = "#">저장</a>
+            </button>
+        </div>
+        <div class = "aside" >
+            <div class = "box1">
+            <p>아이디</p>
+            <input type="text" name="username" id="username" value="" class="form-control input-lg" placeholder="{{user}}">
 <!--            <p class = "box2"> {{user}}</p>-->
-        </div>
-        <div class = "box1">
-        <p > 생년월일</p>
-        <p class = "box2">{{user.birth}}</p>
-        </div>
-        <div class = "box1">
-        <p > 이메일</p>
+            </div>
+            <div class = "box1">
+            <p > 생년월일</p>
+            <p class = "box2">{{user.birth}}</p>
+            </div>
+            <div class = "box1">
+            <p > 이메일</p>
 <!--            <p class = "box2">{{user.email}}</p>-->
-        <input type="text" name="email" id="email" value="" class="form-control input-lg" placeholder="{{user.email}}">
-        </div>
-        <div class = "box1">
-        <p > 비밀번호</p>
-        <input type="password" name="password1" id="password1" value="" class="form-control input-lg" placeholder="Password">
-        </div>
-        <div class = "box1">
-        <p > 비밀번호 재입력</p>
-        <input type="password" name="password2" id="password2" value="" class="form-control input-lg" placeholder="Password">
-        </div>
-
-    </div>
-
-    <div class="section">
-        <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse;">
-        <th>
-            <h4 style = "text-align: center; padding-top: 10px; "><span><strong>내가 쓴 글</strong></span></h4>
-        </th>
-            <div class = "container2 d-flex justify-content-center">
-                <table style = "width: 100%; text-align:center; width: 100%; border-bottom: 1px solid black;">
-                    <tr style = "border-bottom: 1px solid black; border-top: 1px solid black;" >
-                        <th>no</th>
-                        <th>질문</th>
-                        <th>작성일</th>
-                        <th>조회수</th>
-                    </tr>
-                    {% for post in my_post_list%}
-                        <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer; ">
-                            <td>{{post.id}}</td>
-                            <td style="text-align:left; min-width:150px">
-                                <span><strong>{{post.title}}</strong></span>
-                                <br><span>{{post.contents}}</span>
-                            </td>
-                            <td style="max-width:100px">{{post.create_date|date:'y.m.d H:i'}}</td>
-                            <td>{{post.view_cnt}}</td>
-                        </tr>
-                    {%endfor%}
-                </table>
+            <input type="text" name="email" id="email" value="" class="form-control input-lg" placeholder="{{user.email}}">
             </div>
+            <div class = "box1">
+            <p > 비밀번호</p>
+            <input type="password" name="password1" id="password1" value="" class="form-control input-lg" placeholder="Password">
+            </div>
+            <div class = "box1">
+            <p > 비밀번호 재입력</p>
+            <input type="password" name="password2" id="password2" value="" class="form-control input-lg" placeholder="Password">
+            </div>
+
         </div>
 
-        <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse; border-top: 1px solid black;">
-            <th>
-                <h4 style = "text-align: center;"><span><strong>북마크 한 글</strong></span></h4>
+        <div class="section">
+            <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse;" >
+            <th >
+                <h4 style = "text-align: center; padding-top: 10px; "><span><strong>내가 쓴 글</strong></span></h4>
             </th>
-            <div class = "container2 d-flex justify-content-center" >
-                <table style = "text-align:center; width: 100%; border-bottom: 1px solid black;">
-                    <tr style = "border-bottom: 1px solid black; border-top: 1px solid black;">
-                        <th>no</th>
-                        <th>질문</th>
-                        <th>작성일</th>
-                        <th>조회수</th>
-                    </tr>
-                    {% for post in my_bookmark_list%}
-                        <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer">
-                            <td>{{post.id}}</td>
-                            <td style="text-align:left; min-width:150px">
-                                <span><strong>{{post.title}}</strong></span>
-                                <br><span>{{post.contents}}</span>
-                            </td>
-                            <td style="max-width:100px">{{post.create_date|date:'y.m.d H:i'}}</td>
-                            <td>{{post.view_cnt}}</td>
+
+                <div class = "container2 d-flex justify-content-center">
+                    <table style = "width: 100%; text-align:center; width: 100%; border-bottom: 1px solid black;">
+                        <tr style = "border-bottom: 1px solid black; border-top: 1px solid black;" >
+                            <th>no</th>
+                            <th>질문</th>
+                            <th>작성일</th>
+                            <th>조회수</th>
                         </tr>
-                    {%endfor%}
+                        {% for post in my_post_list%}
+                            <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer; ">
+                                <td>{{post.id}}</td>
+                                <td style="text-align:left; min-width:150px">
+                                    <span><strong>{{post.title}}</strong></span>
+                                    <br><span>{{post.contents}}</span>
+                                </td>
+                                <td style="max-width:100px">{{post.create_date|date:'y.m.d H:i'}}</td>
+                                <td>{{post.view_cnt}}</td>
+                            </tr>
+                        {%endfor%}
                     </table>
+                </div>
             </div>
-        </div>
-    </div>
+            <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse; border-top: 1px solid black;">
+                <th>
+                    <h4 style = "text-align: center;"><span><strong>북마크 한 글</strong></span></h4>
+                </th>
+                <div class = "container2 d-flex justify-content-center" >
+                    <table style = "text-align:center; width: 100%; border-bottom: 1px solid black;">
+                        <tr style = "border-bottom: 1px solid black; border-top: 1px solid black;">
+                            <th>no</th>
+                            <th>질문</th>
+                            <th>작성일</th>
+                            <th>조회수</th>
+                        </tr>
+                        {% for post in my_bookmark_list%}
+                            <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer">
+                                <td>{{post.id}}</td>
+                                <td style="text-align:left; min-width:150px">
+                                    <span><strong>{{post.title}}</strong></span>
+                                    <br><span>{{post.contents}}</span>
+                                </td>
+                                <td style="max-width:100px">{{post.create_date|date:'y.m.d H:i'}}</td>
+                                <td>{{post.view_cnt}}</td>
+                            </tr>
+                        {%endfor%}
+                        </table>
+                    </div>
+                </div>
+            </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
