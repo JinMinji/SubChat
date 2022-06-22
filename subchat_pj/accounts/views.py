@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from .forms import UserForm
@@ -12,7 +13,8 @@ def signup(request):
             year = form.cleaned_data.get("year")
             month = form.cleaned_data.get("month")
             day = form.cleaned_data.get("day")
-            birth = year+month+day
+            birth = year + month + day
+            birth = datetime.strptime(birth, "%Y%m%d")
             account = form.save(commit=False)
             account.birth = birth
             account.save()

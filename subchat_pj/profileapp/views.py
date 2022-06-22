@@ -1,16 +1,22 @@
+from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from freeapp.models import Post, Bookmark
 from .models import Emoji
 from accounts.forms import UserForm
 from accounts.models import User
+from .forms import CustomUserChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
+from datetime import datetime
 
 
 def mypage(request):
     if request.method == "POST":
         #수정하기
-        user_form = UserForm(request.POST, instance=request.user)
+        user_form = CustomUserChangeForm(request.POST, instance=request.user)
+        # print(user_form.year)
         if user_form.is_valid():
             user_form.save()
             return redirect('/profile/mypage')
@@ -40,7 +46,6 @@ def mypage(request):
 
     emoji_list = Emoji.objects.all()
     return render(request, 'profileapp/mypage.html', {'form': form, 'my_emoji': my_emoji, 'my_post_list': my_post_list, 'my_bookmark_list': my_bookmark_list})
-
 
 
 def emoji(request):
@@ -90,4 +95,20 @@ def test(request):
     emoji_list = Emoji.objects.all()
     return render(request, 'profileapp/mypage_bak.html', {'form': form, 'my_emoji': my_emoji, 'my_post_list': my_post_list,
                                                       'my_bookmark_list': my_bookmark_list})
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+
+            return render(request, 'profileapp/change_complete.html')
+
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(request, 'profileapp/change_password.html', {'form': form})
 

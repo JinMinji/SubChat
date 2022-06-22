@@ -16,6 +16,8 @@
     </div>
 
     <div class = "aside" >
+        <h2>기본정보 수정</h2>
+        <span onclick="window.open(href='{% url 'profile:change_password'%}','비밀번호변경','width=300,height=300,location=no,status=no,scrollbars=yes');" style="cursor:pointer">비밀번호 변경</span>
         <form method="post" action=".">
          {% csrf_token %}
          {% include "form_errors.html" %}
@@ -24,18 +26,11 @@
             <br>
             <label>email: </label>
             <input type="text" name="email" id="email" class="form-control input-lg" value="{{form.email.value|default_if_none:''}}"/>
-            <br>
-            <label style="width: 10px;">password: </label>
-            <input type="password" name="password1" id="password1" class="form-control input-lg" value="{{form.password1.value|default_if_none:''}}"/>
-            <br>
-            <label>password confirmation: </label>
-            <input type="password" name="password2" id="password2" class="form-control input-lg" value="{{form.password2.value|default_if_none:''}}"/>
-            <br>
             <label>Birth Date : </label>
-            <input type="date" class="form-control input-lg" value="{{form.birth.value|default_if_none:''}}">
+            <input type="date" class="form-control input-lg" id="birth" name="birth" value="{{user.birth|date:'Y-m-d'}}">
             <br>
             <label>Gender : </label>
-            {%if form.gender == 'M'%}
+            {%if form.gender.value == 'M'%}
                 <label class="radio-inline">
                     <input type="radio" name="gender" value="M" id=male checked="True" /> Male
                 </label>
