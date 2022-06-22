@@ -15,7 +15,10 @@ class PostList(ListView):
 
     def get_queryset(self, **kwargs):
         all_post = Post.objects.all().order_by("-id")
-        line_post = all_post.filter(line=self.kwargs['line_num'])
+        try:
+            line_post = all_post.filter(line=self.kwargs['line_num'])
+        except:
+            return all_post
 
         search_keyword = self.request.GET.get("searchword")
 

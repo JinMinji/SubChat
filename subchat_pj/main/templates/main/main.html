@@ -45,7 +45,7 @@
                         <div class="col-xl-4 col-lg-5">
                             <div class="featured-text text-center text-lg-left">
                                 <h4><br><br><br>{{mainroom.name}} 게시판<br><br><br><br><br><br></h4>
-                                <a href="{% url 'free:line' mainroom.slug %}" class="px-5 py-3 block rounded-xl text-green bg-teal-600 hover:bg-teal-700">View</a>
+                                <a href="{% url 'free:list' mainroom.id %}" class="px-5 py-3 block rounded-xl text-green bg-teal-600 hover:bg-teal-700">View</a>
                                 <h4><br><br><br>{{mainroom.name}} 채팅방<br><br><br><br><br><br></h4>
                                 <a href="{% url 'chat:room' mainroom.slug %}" class="px-5 py-3 block rounded-xl text-green bg-teal-600 hover:bg-teal-700">Join</a>
 
