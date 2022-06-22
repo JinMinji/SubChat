@@ -8,9 +8,9 @@
 
         <ul id="post_menu" style="list-style-type: none;">
             {% if user.is_authenticated %}
-                <li style="float:right; text-align:center;"><a href="{% url 'free:create' %}">글쓰기&#9997;</a></li>
+                <li style="float:right; text-align:center;"><button onclick="location.href='{% url 'free:create' %}'">글쓰기&#9997;</button></li>
             {% else %}
-                <li style="float:right; text-align:center;"><a href="{% url 'accounts:login' %}">글쓰기&#9997;</a></li>
+                <li style="float:right; text-align:center;"><button onclick="location.href='{% url 'accounts:login' %}'">글쓰기&#9997;</button></li>
             {% endif %}
         </ul>
 
@@ -47,11 +47,10 @@
             <td>{{post.id}}</td>
             <td style="text-align:left; min-width:250px">
                 <span><strong>{{post.title}}</strong></span>
-                <br><span>{{post.contents}}</span>
             </td>
             <td>{{post.author}}</td>
             <td style="max-width:100px">{{post.create_date|date:'Y-m-d H:i'}}</td>
-            <td></td>
+            <td>{{post.comment_set.all.count}}</td>
             <td>&#128529; : {{post.report_cnt}}</td>
             <td>{{post.view_cnt}}</td>
         </tr>
