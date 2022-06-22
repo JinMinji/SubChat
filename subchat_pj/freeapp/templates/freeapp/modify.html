@@ -10,24 +10,9 @@
 
 	<div id="postform">
 		<form method="post" action="./{{post.id}}">
+			{{form}}
 			{% csrf_token %}
-			{% include "form_errors.html" %}
 
-			<div style="float:right">
-				<label>작성자 : </label>
-				<input type="hidden" name="author" id="author" value="{{form.author.value|default_if_none:''}}">{{user}}
-			</div>
-
-			<div>
-	<!--			<label>글 제목 : </label>-->
-				<input type="text" name="title" id="title" value="{{post.title}}">
-			</div>
-
-			<div>
-	<!--			<label>글 내용 : </label>-->
-				<textarea name="contents" id="contents">{{post.contents}}</textarea>
-	<!--			<input type="text" placeholder="내용을 입력하세요." name="contents" id="contents" value="{{form.contents.value|default_if_none:''}}">-->
-			</div>
 
 			<button type="submit">저장하기</button>
 			<button type="button" onclick="location.href='/free/list/'">돌아가기</button>

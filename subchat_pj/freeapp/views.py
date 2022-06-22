@@ -61,7 +61,6 @@ def post(request, pk):  #게시글 내용 보여주는 곳
             comment.author = request.user
             comment.post_id = pk
             comment.save()
-            print("test--------!")
             return redirect("free:post", pk)
 
     post = Post.objects.get(id=pk)
@@ -106,10 +105,10 @@ def modify(request, pk):
                 form.save()
                 return redirect('/free/list')
     else:
-        form = PostForm()
+        form = PostForm(instance=original_post)
         # print(form.title, form.contents)
 
-    return render(request, 'freeapp/modify.html', {'form': form, 'post': original_post})
+    return render(request, 'freeapp/modify.html', {'form': form})
 
 
 def delete(request, pk):

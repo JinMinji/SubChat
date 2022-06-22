@@ -12,7 +12,6 @@ class Post(models.Model):
     line = models.IntegerField(default=0)
 
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-
     view_cnt = models.IntegerField(default=0)
 
     def __str__(self):

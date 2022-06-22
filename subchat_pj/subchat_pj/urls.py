@@ -23,4 +23,5 @@ urlpatterns = [
     path('chat/', include('chatapp.urls')),
     path('free/', include('freeapp.urls')),
     path('profile/', include('profileapp.urls')),
+    path('summernote/', include('django_summernote.urls')),
 ]
