@@ -6,5 +6,6 @@ function emoji_change(e){
 
 function emoji_save(){
     let new_emoji = document.getElementById('selected_emoji2').innerText;
-    window.location.href = '/accounts/emoji_modify/'+new_emoji;
+    opener.location.href = '/profile/emoji_modify/'+new_emoji;
+    window.close();
 };

@@ -51,7 +51,7 @@
             {% if user.is_authenticated %}
             <button type="button" onclick="location.href='/free/post/{{post.id}}/like'">&#128077;</button>
                <button type="button" onclick="location.href='/free/post/{{post.id}}/hate'">&#128078;</button>
-            <button type="button" onclick="window.open(href='{% url 'free:report' post.id %}','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">신고하기</button>
+            <button type="button" onclick="window.open(href='{% url 'free:report' post.id %}','신고하기','width=430,height=500,location=no,status=no,scrollbars=yes');">신고하기</button>
             {% endif %}
          {% endif %}
 

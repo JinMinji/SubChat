@@ -2,58 +2,62 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'profileapp/mypage.css' %}">
+<link href="{% static 'profileapp/emoji_select.css' %}" rel="stylesheet" >
+
 <body></body>
-    <div class="mypage">
-        <div class = "page" >
-            <div class="page2">
-                <div class="box" style="background: #BDBDBD;">
-                    <img class="profile" >
-                </div>
-                    <h1 style="text-align: center;">{{user}} Page</h1>
+<div class="mypage">
+    <div class = "page" >
+        <div class="page2">
+            <div class="box" style="background: #fff;">
+                <div onclick="window.open(href='{% url 'profile:emoji'%}','이모지변경','width=600,height=700,location=no,status=no,scrollbars=yes');" style="text-align: center; font-size:70pt; cursor:pointer">{{my_emoji|safe}}</div>
             </div>
+                <h1 style="text-align: center;">{{user}} Page</h1>
         </div>
+    </div>
 
-        <div>
-            <button class = "modifybar" type = "button">
-                <a href = "#">수정</a>
-            </button>
-        </div>
-        <div>
-            <button class = "savebar" type = "button">
-                <a href = "#">저장</a>
-            </button>
-        </div>
-        <div class = "aside" >
-            <div class = "box1">
-            <p>아이디</p>
-            <input type="text" name="username" id="username" value="" class="form-control input-lg" placeholder="{{user}}">
-<!--            <p class = "box2"> {{user}}</p>-->
-            </div>
-            <div class = "box1">
-            <p > 생년월일</p>
-            <p class = "box2">{{user.birth}}</p>
-            </div>
-            <div class = "box1">
-            <p > 이메일</p>
-<!--            <p class = "box2">{{user.email}}</p>-->
-            <input type="text" name="email" id="email" value="" class="form-control input-lg" placeholder="{{user.email}}">
-            </div>
-            <div class = "box1">
-            <p > 비밀번호</p>
-            <input type="password" name="password1" id="password1" value="" class="form-control input-lg" placeholder="Password">
-            </div>
-            <div class = "box1">
-            <p > 비밀번호 재입력</p>
-            <input type="password" name="password2" id="password2" value="" class="form-control input-lg" placeholder="Password">
-            </div>
-
-        </div>
-
+    <div class = "aside" >
+        <form method="post" action=".">
+         {% csrf_token %}
+         {% include "form_errors.html" %}
+            <label>ID : </label>
+            <label>{{form.username.value|default_if_none:''}}</label>
+            <br>
+            <label>email : </label>
+            <input type="text" name="email" id="email" value="{{form.email.value|default_if_none:''}}"/>
+            <br>
+            <label style="width: 10px;">password : </label>
+            <input type="password" name="password1" id="password1" value="{{form.password1.value|default_if_none:''}}"/>
+            <br>
+            <label>password confirmation: </label>
+            <input type="password" name="password2" id="password2" value="{{form.password2.value|default_if_none:''}}"/>
+            <br>
+            <label>Birth Date : </label>
+            <input type="date" value="{{form.birth.value|default_if_none:''}}">
+            <br>
+            <label>Gender : </label>
+            {%if form.gender == 'M'%}
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="M" id=male checked="True" /> Male
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="F" id=female /> Female
+                </label>
+            {%else%}
+            <label class="radio-inline">
+                    <input type="radio" name="gender" value="M" id=male /> Male
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="F" id=female checked="True"/> Female
+                </label>
+            {%endif%}
+            <br>
+            <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">수정하기</button>
+        </form>
         <div class="section">
             <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse;" >
-            <th >
-                <h4 style = "text-align: center; padding-top: 10px; "><span><strong>내가 쓴 글</strong></span></h4>
-            </th>
+                <th>
+                    <h4 style = "text-align: center; padding-top: 10px; "><span><strong>내가 쓴 글</strong></span></h4>
+                </th>
 
                 <div class = "container2 d-flex justify-content-center">
                     <table style = "width: 100%; text-align:center; width: 100%; border-bottom: 1px solid black;">
@@ -77,6 +81,7 @@
                     </table>
                 </div>
             </div>
+
             <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse; border-top: 1px solid black;">
                 <th>
                     <h4 style = "text-align: center;"><span><strong>북마크 한 글</strong></span></h4>
@@ -103,10 +108,12 @@
                         </table>
                     </div>
                 </div>
-            </div>
-
+        </div>
+    </div>
 </div>
 
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src = "{%static 'profileapp/emoji_select.js'%}"></script>
 
 {% endblock %}
