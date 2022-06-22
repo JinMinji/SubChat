@@ -4,8 +4,12 @@
 <link rel="stylesheet" href="{% static 'freeapp/post.css' %}">
  <header class="masthead1">
     <div class="container d-flex justify-content-center">
-        {%%}
+        {% if line_num == 0 %}
+        <h2>전체 게시글 목록 화면</h2>
+        {% else %}
         <h2>{{line_num}}호선 게시글 목록 화면</h2>
+
+        {% endif %}
 
         <ul id="post_menu" style="list-style-type: none;">
             {% if user.is_authenticated %}

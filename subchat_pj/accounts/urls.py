@@ -9,5 +9,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('signup/', views.signup, name="signup"),
     path('emoji/', views.emoji, name="emoji"),
-    path('emoji_modify/<str:new_emoji>', views.emoji_modify, name="emoji_modify"),
+    path('emoji_modify/<str:new_emoji_id>', views.emoji_modify, name="emoji_modify"),
 ]

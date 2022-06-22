@@ -15,16 +15,13 @@ class PostList(ListView):
 
     def get_queryset(self):
         all_post = Post.objects.all().order_by("-id")
-        if self.kwargs['line_num'] == 0:
-            return all_post
 
-        try:
+        if self.kwargs['line_num'] == 0:
+            line_post = all_post
+        else:
             line_post = all_post.filter(line=self.kwargs['line_num'])
-        except:
-            return all_post
 
         search_keyword = self.request.GET.get("searchword")
-
         if search_keyword:
             if len(search_keyword) > 1:
                 searched_list = line_post.filter(Q(title__icontains=search_keyword) | Q(contents__icontains=search_keyword))
@@ -34,6 +31,7 @@ class PostList(ListView):
                 messages.error(self.request, '검색어는 2글자 이상 입력해주세요.')
 
         return line_post
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,6 +49,7 @@ class PostList(ListView):
 
         page_range = paginator.page_range[start_index:end_index]
         context['page_range'] = page_range
+        context['line_num'] = self.kwargs['line_num']
 
         return context
 

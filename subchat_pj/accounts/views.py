@@ -35,14 +35,16 @@ def emoji(request):
     if str(request.user) == 'AnonymousUser':
         return redirect('/accounts/login')
 
-    my_emoji = request.user.emoji
+    try:
+        my_emoji = Emoji.objects.get(id=request.user.emoji_id)
+    except:
+        my_emoji = Emoji.objects.get(id=1)
     return render(request, 'accounts/emoji_select.html', {'emoji_list': emoji_list, "my_emoji": my_emoji})
 
 
-def emoji_modify(request, new_emoji):
+def emoji_modify(request, new_emoji_id):
     user = User.objects.get(id=request.user.id)
-    print(user, len(user.emoji), user.emoji, len(new_emoji), new_emoji)
-    user.emoji = str(new_emoji)
+    user.emoji_id = new_emoji_id
     user.save()
 
-    return redirect('/profile/mypage')
+    return redirect('/profileapp/mypage')

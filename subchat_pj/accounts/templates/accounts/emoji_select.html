@@ -6,14 +6,14 @@
 <div style="width:50%; margin:auto; display:grid; grid-template-columns: 70% 20%">
     <div class="emoji_grid" style="text-align:center; display:grid; grid-template-columns: auto auto auto auto auto auto auto">
         {% for emoji in emoji_list %}
-            <span class="emoji" style="border:solid; border-width:1px; width:auto; font-size:30px" onclick="emoji_change(this)">{{emoji|safe}}<input type="hidden" id="emoji{{emoji.id}}" value="{{emoji}}"></span>
+            <span class="emoji" style="border:solid; border-width:1px; width:auto; font-size:30px" onclick="emoji_change(this)">{{emoji|safe}}<input type="hidden" value="{{emoji.id}}"></span>
         {% endfor %}
     </div>
     <div style="text-align: center;">
         <p style="font-size:30px;">
             <span>내 이모지 : </span>
-            <span id="selected_emoji">{{my_emoji|safe}}</span>
-            <input type="hidden" id="selected_emoji2" value="{{my_emoji}}">
+            <span id="selected_emoji"> {{my_emoji|safe}} </span>
+            <input type="hidden" id="selected_emoji2" value="{{my_emoji.id}}">
         </p>
         <p>
         <button onclick="emoji_save()">저장하기</button>

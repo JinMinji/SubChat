@@ -80,7 +80,7 @@
     {% endfor %}
 
     <div id="commentform">
-      <form method="post" action="./{{post.id}}">
+      <form method="post" action=".">
          {% csrf_token %}
          {% include "form_errors.html" %}
          <div>

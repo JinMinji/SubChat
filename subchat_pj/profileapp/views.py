@@ -21,4 +21,4 @@ def mypage(request):
         if post.id in post_id_list:
             my_bookmark_list.append(post)
 
-    return render(request, 'profile/mypage.html', {'my_post_list': my_post_list, 'my_bookmark_list': my_bookmark_list})
+    return render(request, 'profileapp/mypage.html', {'my_post_list': my_post_list, 'my_bookmark_list': my_bookmark_list})
