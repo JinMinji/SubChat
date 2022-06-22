@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from .forms import UserForm
-
+from .models import Emoji, User
 
 
 # Create your views here.
@@ -28,3 +28,21 @@ def signup(request):
         form = UserForm()
 
     return render(request, 'accounts/signup.html', {'form': form})
+
+
+def emoji(request):
+    emoji_list = Emoji.objects.all()
+    if str(request.user) == 'AnonymousUser':
+        return redirect('/accounts/login')
+
+    my_emoji = request.user.emoji
+    return render(request, 'accounts/emoji_select.html', {'emoji_list': emoji_list, "my_emoji": my_emoji})
+
+
+def emoji_modify(request, new_emoji):
+    user = User.objects.get(id=request.user.id)
+    print(user, new_emoji)
+    user.emoji = str(new_emoji)
+    user.save()
+
+    return redirect('/profile/mypage')

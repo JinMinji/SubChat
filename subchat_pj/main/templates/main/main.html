@@ -35,72 +35,92 @@
             </div>
         </section>
         <!-- Projects-->
-        {% for mainroom in rooms %}
-
-            <section class="projects-section bg-light" id="projects{{mainroom.id}}">
-                <div class="container px-4 px-lg-5">
-                    <!-- Featured Project Row-->
-                    <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                        <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/static/assets/img/iloveimg-resized/{{mainroom.id}}Line.jpg" alt="..." /></div>
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="featured-text text-center text-lg-left">
-                                <h4 style="padding: 10px">{{mainroom.name}}</h4>
-                                <br><br>
-                                <a href="{% url 'chat:room' mainroom.slug %}" class="px-5 py-3"
-                                   {% if mainroom.id == 1 %}
-                                        style="color:white; background-color: #0052A4"
-                                   {% elif mainroom.id == 2 %}
-                                        style="color:white; background-color: #009D3E"
-                                   {% elif mainroom.id == 3 %}
-                                        style="color:white; background-color: #EF7C1C"
-                                   {% elif mainroom.id == 4 %}
-                                        style="color:white; background-color: #00A5DE"
-                                   {% elif mainroom.id == 5 %}
-                                        style="color:white; background-color: #996CAC"
-                                   {% elif mainroom.id == 6 %}
-                                        style="color:white; background-color: #CD7C2F"
-                                   {% elif mainroom.id == 7 %}
-                                        style="color:white; background-color: #747F00"
-                                   {% elif mainroom.id == 8 %}
-                                        style="color:white; background-color: #EA545D"
-                                   {% elif mainroom.id == 9 %}
-                                        style="color:white; background-color: #BDB092"
-                                   {% elif mainroom.id == 10 %}
-                                        style="color:white; background-color: #77C4A3"
-                                   {% endif %}
-                                >채팅방</a>
-                                <a href="{% url 'free:list' mainroom.id %}" class="px-5 py-3 "
-                                {% if mainroom.id == 1 %}
-                                        style="color:white; background-color: #0052A4"
-                                   {% elif mainroom.id == 2 %}
-                                        style="color:white; background-color: #009D3E"
-                                   {% elif mainroom.id == 3 %}
-                                        style="color:white; background-color: #EF7C1C"
-                                   {% elif mainroom.id == 4 %}
-                                        style="color:white; background-color: #00A5DE"
-                                   {% elif mainroom.id == 5 %}
-                                        style="color:white; background-color: #996CAC"
-                                   {% elif mainroom.id == 6 %}
-                                        style="color:white; background-color: #CD7C2F"
-                                   {% elif mainroom.id == 7 %}
-                                        style="color:white; background-color: #747F00"
-                                   {% elif mainroom.id == 8 %}
-                                        style="color:white; background-color: #EA545D"
-                                   {% elif mainroom.id == 9 %}
-                                        style="color:white; background-color: #BDB092"
-                                   {% elif mainroom.id == 10 %}
-                                        style="color:white; background-color: #77C4A3"
-                                   {% endif %}
-                                >게시판</a>
-                                <br><br>
-                            </div>
-
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="background: rgba(0,0,0,0.8) 100%;">
+            <div class="carousel-indicators">
+                {% for mainroom in rooms %}
+                    {% if mainroom.id == 1%}
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    {% else %}
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{mainroom.id|add:-1}}" aria-label="Slide {{mainroom.id}}}"></button>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="carousel-inner" style="text-align: center;" id="projects">
+                {% for mainroom in rooms %}
+                    {% if mainroom.id == 1 %}
+                        <div class="carousel-item active" id="projects{{mainroom.id}}" style="background-image: url('/static/assets/img/smap_sg{{mainroom.id}}.png');background-size: contain;background-repeat: no-repeat;background-position: center;">
+                            <br><br><br><br><br><br><br><br><br>
+                                <div class=" text-center text-lg-left" >
+                                    <h1 style="padding: 10px; text-align: center; color:white">{{mainroom.name}}</h1><br><br>
+                                    <a href="{% url 'chat:room' mainroom.slug %}" class="px-5 py-3" style="color:white; background-color: #0052A4">채팅방</a>
+                                    <a href="#" class="px-5 py-3 " style="color:white; background-color: #0052A4">게시판</a>
+                                </div>
+                            <br><br><br><br><br><br><br><br><br>
                         </div>
-                    </div>
-                    </div>
-             </section>
-        {% endfor %}
-
+                    {% else %}
+                        <div class="carousel-item" id="projects{{mainroom.id}}" style="background-image: url('/static/assets/img/smap_sg{{mainroom.id}}.png');background-size: contain;background-repeat: no-repeat;background-position: center;">
+                            <br><br><br><br><br><br><br><br><br>
+                                <div class=" text-center text-lg-left">
+                                    <h1 style="padding: 10px; text-align: center; color:white">{{mainroom.name}}</h1><br><br>
+                                    <a href="{% url 'chat:room' mainroom.slug %}" class="px-5 py-3"
+                                       {% if mainroom.id == 2 %}
+                                            style="color:white; background-color: #009D3E"
+                                       {% elif mainroom.id == 3 %}
+                                            style="color:white; background-color: #EF7C1C"
+                                       {% elif mainroom.id == 4 %}
+                                            style="color:white; background-color: #00A5DE"
+                                       {% elif mainroom.id == 5 %}
+                                            style="color:white; background-color: #996CAC"
+                                       {% elif mainroom.id == 6 %}
+                                            style="color:white; background-color: #CD7C2F"
+                                       {% elif mainroom.id == 7 %}
+                                            style="color:white; background-color: #747F00"
+                                       {% elif mainroom.id == 8 %}
+                                            style="color:white; background-color: #EA545D"
+                                       {% elif mainroom.id == 9 %}
+                                            style="color:white; background-color: #BDB092"
+                                       {% elif mainroom.id == 10 %}
+                                            style="color:white; background-color: #77C4A3"
+                                       {% endif %}
+                                    >채팅방</a>
+                                    <a href="{% url 'free:list' mainroom.id %}" class="px-5 py-3 "
+                                    {% if mainroom.id == 1 %}
+                                            style="color:white; background-color: #0052A4"
+                                       {% elif mainroom.id == 2 %}
+                                            style="color:white; background-color: #009D3E"
+                                       {% elif mainroom.id == 3 %}
+                                            style="color:white; background-color: #EF7C1C"
+                                       {% elif mainroom.id == 4 %}
+                                            style="color:white; background-color: #00A5DE"
+                                       {% elif mainroom.id == 5 %}
+                                            style="color:white; background-color: #996CAC"
+                                       {% elif mainroom.id == 6 %}
+                                            style="color:white; background-color: #CD7C2F"
+                                       {% elif mainroom.id == 7 %}
+                                            style="color:white; background-color: #747F00"
+                                       {% elif mainroom.id == 8 %}
+                                            style="color:white; background-color: #EA545D"
+                                       {% elif mainroom.id == 9 %}
+                                            style="color:white; background-color: #BDB092"
+                                       {% elif mainroom.id == 10 %}
+                                            style="color:white; background-color: #77C4A3"
+                                       {% endif %}
+                                    >게시판</a>
+                                </div>
+                            <br><br><br><br><br><br><br><br><br>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
         <!-- Signup-->
         <section class="signup-section" id="signup">
             <div class="container px-4 px-lg-5">

@@ -39,6 +39,7 @@
             <th>작성자</th>
             <th>작성일</th>
             <th>댓글수</th>
+            <th>반응</th>
             <th>신고</th>
             <th>조회수</th>
         </tr>
@@ -51,7 +52,8 @@
             <td>{{post.author}}</td>
             <td style="max-width:100px">{{post.create_date|date:'Y-m-d H:i'}}</td>
             <td>{{post.comment_set.all.count}}</td>
-            <td>&#128529; : {{post.report_cnt}}</td>
+            <td>&#128077;{{post.like_set.all.count}} &#128078;{{post.hate_set.all.count}}</td>
+            <td>&#128226; : {{post.report_cnt}}</td>
             <td>{{post.view_cnt}}</td>
         </tr>
         {%endfor%}

@@ -1,0 +1,46 @@
+.summernote-div{
+    margin-left:33%;
+    margin-right:33%;
+    margin-top:-30px;
+    width:100px;
+    position: relative;
+
+    top:40px
+}
+#postform > form > label:nth-child(3) {
+    display: none;
+}
+#postform > form > label:nth-child(1){
+    display: none;
+}
+#id_title{
+    margin-top:200px;
+    margin-bottom:-200px;
+    margin-left:33%;
+    margin-right:33%;
+    top:180px;
+    width:720px;
+    height:40px;
+
+}
+#page-top > div > div.container.d-flex.justify-content-center{
+    position: relative;
+    width:720px;
+    margin-top:200px;
+    margin-bottom:-190px;
+    margin-left:33%;
+    margin-right:33%;
+    display:inline-block;
+
+}
+.button{
+    position:absolute;
+    margin-top:40px;
+    margin-left:62%;
+    display:block;
+}
+body{
+background: rgb(255,255,255);
+background: linear-gradient(0deg, rgba(255,255,255,1) 86%, rgba(154,133,156,1) 100%);
+height:720px
+}

@@ -1,12 +1,12 @@
+
 {% load static %}
 <link href="/static/styles.css" rel="stylesheet" />
 {% include 'test2.html' %}
 
+
+
 <style>
-    .chat-messages{
-        height: 400px;
-        overflow-y: auto;
-    }
+
     body{
        background: #092756;
        background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
@@ -15,6 +15,22 @@
        background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
        background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+    }
+
+    #chatWrap{
+        padding: 40;
+        margin-left: 25%;
+        width: 50%;
+        background: black;
+        border: solid #0052A4;
+        border-radius: 25px;
+    }
+
+
+
+    .chat-messages{
+        height: 400px;
+        overflow-y: auto;
     }
 
 </style>
@@ -27,50 +43,53 @@
 
         <div class="lg:w-2/4 mx-25 lg:mx-auto p-4 bg-black rounded-xl"
              {% if room.id == 1 %}
-                style="border: solid #0052A4"
+                style="border: solid #0052A4; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 2 %}
-                style="border: solid #009D3E"
+                style="border: solid #009D3E; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 3 %}
-                style="border: solid #EF7C1C"
+                style="border: solid #EF7C1C; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 4 %}
-                style="border: solid #00A5DE"
+                style="border: solid #00A5DE; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 5 %}
-                style="border: solid #996CAC"
+                style="border: solid #996CAC; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 6 %}
-                style="border: solid #CD7C2F"
+                style="border: solid #CD7C2F; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 7 %}
-                style="border: solid #747F00"
+                style="border: solid #747F00; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 8 %}
-                style="border: solid #EA545D"
+                style="border: solid #EA545D; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 9 %}
-                style="border: solid #BDB092"
+                style="border: solid #BDB092; display: flex;align-items: center;justify-content: center;"
              {% elif room.id == 10 %}
-                style="border: solid #77C4A3"
+                style="border: solid #77C4A3; display: flex;align-items: center;justify-content: center;"
 
              {% endif %}
         >
-        <div class="chat-messages space-y-3" id="chat-messages">
-            {% for message in messages %}
-                {% if message.user.username == user.username %}
-
-                    <div class="p-4 bg-yellow-200 rounded-xl" style="text-align:right; height:110px;">
-                        <p class="font-semibold"> {{ message.user.username }} <span style="font-size: 0.1em"> {{message.date_added|date:"Y.n.d. A g:i:s"}} </span></p>
-                        <p>{{ message.content }}</p>
+        <div class="chat-messages space-y-3" id="chat-messages" style="width: 100%;">
+            <div class="meg_col" style="flex: 1;" >
+                {% for message in messages %}
+                    {% if message.user.username == user.username %}
+                    <div class="my-message" style="display: flex; align-items: center; justify-content: flex-end;">
+                        <div class="p-3 bg-yellow-200 rounded-xl" style="text-align:right; height: fit-content;width: fit-content; margin: 1%;">
+                            <p class="font-semibold"> {{ message.user.username }} <span style="font-size: 0.1em;color: rgba(192, 192, 192, 0.7);"> {{message.date_added|date:"Y.n.d. A g:i:s"}} </span></p>
+                            <p>{{ message.content }}</p>
+                        </div>
                     </div>
-
-
-                {% else %}
-                    <div class="p-4 bg-red-200 rounded-xl" style="height:110px">
-                        <p class="font-semibold"> {{ message.user.username }} <span style="font-size: 0.1em"> {{message.date_added|date:"Y.n.d. A g:i:s"}} </span></p>
-                        <p>{{ message.content }}</p>
+                    {% else %}
+                    <div class="another-message" style="display: flex; align-items: center;">
+                        <div class="p-3 bg-red-200 rounded-xl" style="height: fit-content;width: fit-content; margin: 1%;">
+                            <p class="font-semibold"> {{ message.user.username }} <span style="font-size: 0.1em;color: rgba(192, 192, 192, 0.7);"> {{message.date_added|date:"Y.n.d. A g:i:s"}} </span></p>
+                            <p>{{ message.content }}</p>
+                        </div>
                     </div>
-                {% endif %}
-            {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
     <div class="lg:w-2/4 mt-6 mx-25 pb-2 px-2 py-1 lg:mx-auto bg-white rounded-xl">
         <form method="post" action="." class="flex">
-            <input type="text" name="content" class="flex-1 mt-3 mr-3" placeholder="메세지는 최대 30글자..." id="chat-message-input">
+            <input type="text" name="content" class="flex-1 mt-3 mr-3" placeholder="메세지입력..." id="chat-message-input">
             <input type="hidden" value="{{ user }}" id="now-user">
             <button class="mt-3 px-5 py-3 rounded-xl text-white bg-black" id="chat-message-submit">Submit</button>
         </form>
@@ -96,7 +115,7 @@
     chatSocket.onmessage = function(e){
         console.log('onmessage')
         const data = JSON.parse(e.data);
-        if(data.message.length<=30){
+        if(data.message.length<=255){
 
             if(data.message) {
                 let time = new Date;
@@ -105,19 +124,20 @@
                 let html = '';
 
                 if(user.value === data.username){
-                    html +=  '<div class="p-4 bg-yellow-200 rounded-xl" style="text-align:right; height:110px;">';
-                    html += '<p class="font-semibold">' + data.username + '<span style="font-size: 0.1em"> ' + time.toLocaleString() + '</span></p>';
-                    html += '<p>' + data.message + '</p></div>';
+                    html += '<div class="my-message" style="display: flex; align-items: center; justify-content: flex-end;">'
+                    html += '<div class="p-3 bg-yellow-200 rounded-xl" style="text-align:right; height: fit-content;width: fit-content; margin: 1%;">'
+                    html += '<p class="font-semibold">' + data.username + '<span style="font-size: 0.1em;color: rgba(192, 192, 192, 0.7); "> ' + time.toLocaleString() + '</span></p>';
+                    html += '<p>' + data.message + '</p></div></div>'
                 }
                 else{
-                    html += '<div class="p-4 bg-red-200 rounded-xl" style="height:110px">';
-                    html += '<p class="font-semibold">' + data.username + '<span style="font-size: 0.1em"> ' + time.toLocaleString() + '</span></p>';
-                    html += '<p>' + data.message + '</p></div>';
+                    html += '<div class="another-message" style="display: flex; align-items: center;">'
+                    html += '<div class="p-3 bg-red-200 rounded-xl" style="height: fit-content;width: fit-content; margin: 1%;">';
+                    html += '<p class="font-semibold">' + data.username + '<span style="font-size: 0.1em;color: rgba(192, 192, 192, 0.7);"> ' + time.toLocaleString() + '</span></p>';
+                    html += '<p>' + data.message + '</p></div></div>'
                 }
-                console.log(html)
-                document.querySelector('#chat-messages').innerHTML += html;
+
+                document.querySelector('.meg_col').innerHTML += html;
                 scrollToBottom();
-                html = '';
             }
             else{
                 let user = document.getElementById('now-user');
@@ -141,23 +161,34 @@
 
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
-
-        if(message.length <= 30 && message.length > 0){
-
-            chatSocket.send(JSON.stringify({
-            'message': message,
-            'username': userName,
-            'room': roomName
-            }));
-
-            messageInputDom.value = '';
-
-            return false;
+        if(message.includes('<')){
+            alert(" '<'는 사용하시면 안됩니다.. ^^; ")
         }
         else{
-            alert("메세지 길이가 너무깁니다!");
-            return false;
+            if(message.length <= 255 ){
+                if(message.legnth === 0){
+                     alert("입력창이 비어있습니다!");
+                     return false;
+                }
+                else{
+                    chatSocket.send(JSON.stringify({
+                    'message': message,
+                    'username': userName,
+                    'room': roomName
+                    }));
+
+                    messageInputDom.value = '';
+
+                    return false;
+                }
+
+            }
+            else{
+                alert("메세지 길이가 너무깁니다!");
+                return false;
+            }
         }
+
 
     };
 

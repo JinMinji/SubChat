@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
-from .models import Post, Comment, Bookmark, Report
+from .models import Post, Comment, Bookmark, Report, Like, Hate
 from .forms import PostForm, CommentForm
 from django.utils import timezone
 from django.db.models import Q
@@ -13,8 +13,11 @@ class PostList(ListView):
     model = Post
     paginate_by = 10    # 페이지 나누는 부분
 
-    def get_queryset(self, **kwargs):
+    def get_queryset(self):
         all_post = Post.objects.all().order_by("-id")
+        if self.kwargs['line_num'] == 0:
+            return all_post
+
         try:
             line_post = all_post.filter(line=self.kwargs['line_num'])
         except:
@@ -125,21 +128,7 @@ def comment_delete(request, comment_id):
 
 
 def list(request):
-    if request.method == "POST":
-        search_keyword = request.POST.get("searchword")
-        post_list = Post.objects.all().order_by("-id")
-
-        if search_keyword:
-            if len(search_keyword) > 1:
-                searched_list = post_list.filter(Q(title__icontains=search_keyword) | Q(contents__icontains=search_keyword))
-                return render(request, 'freeapp/post_list.html', {'post_list': searched_list})
-
-            else:
-                messages.error(request, '검색어는 2글자 이상 입력해주세요.')
-
-    post_list = Post.objects.all().order_by("-id")
-
-    return render(request, 'freeapp/post_list.html', {'post_list': post_list})
+    return redirect('free:list', 0)
 
 
 def bookmark(request, pk):
@@ -180,3 +169,45 @@ def report(request, pk):
 
     else:
         return render(request, 'freeapp/report.html', {'post': reported_post})
+
+
+def like(request, pk):
+    all_like = Like.objects.all()
+    like = all_like.filter(post_id=pk, user_id=request.user.id)
+
+    if like:    #이미 좋아요 함.
+        return redirect('free:post', pk)
+
+    else:   # 좋아요를 증가하기 전, 싫어요가 있는지 확인하고 삭제.
+        all_hate = Hate.objects.all()
+        hate = all_hate.filter(post_id=pk, user_id=request.user.id)
+        if hate:
+            hate.delete()
+
+        new_like = Like()
+        new_like.post_id = pk
+        new_like.user_id = request.user.id
+        new_like.save()
+        return redirect('free:post', pk)
+
+
+def hate(request, pk):
+    all_hate = Hate.objects.all()
+    hate = all_hate.filter(post_id=pk, user_id=request.user.id)
+
+    if hate:  # 이미 싫어요 함. -> 변경없이 리턴
+        return redirect('free:post', pk)
+
+    else:  # 싫어요를 증가하기 전, 좋아요가 있는지 확인하고 있으면 삭제.
+        all_like = Like.objects.all()
+        like = all_like.filter(post_id=pk, user_id=request.user.id)
+        if like:
+            like.delete()
+
+        new_hate = Hate()
+        new_hate.post_id = pk
+        new_hate.user_id = request.user.id
+        new_hate.save()
+
+        return redirect('free:post', pk)
+
