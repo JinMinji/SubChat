@@ -41,7 +41,7 @@ def emoji(request):
 
 def emoji_modify(request, new_emoji):
     user = User.objects.get(id=request.user.id)
-    print(user, new_emoji)
+    print(user, len(user.emoji), user.emoji, len(new_emoji), new_emoji)
     user.emoji = str(new_emoji)
     user.save()
 
