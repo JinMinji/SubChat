@@ -4254,6 +4254,16 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
   transition: box-shadow 0.15s ease-in-out;
 }
+.signupbar {
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  transition: box-shadow 0.15s ease-in-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .floatright{
   float:right;
@@ -4268,6 +4278,10 @@ display:block;
     transition: none;
 
   }
+    .signupbar {
+    transition: none;
+  }
+
 
     .loginbar {
     transition: none;
@@ -4283,6 +4297,9 @@ display:block;
   text-decoration: none;
 }
 
+.signupbar:hover {
+  text-decoration: none;
+}
 .loginbar:hover {
   text-decoration: none;
 }
@@ -4297,7 +4314,11 @@ display:block;
   outline: 0;
   box-shadow: 0 0 0 0.25rem;
 }
-
+.signupbar:focus {
+  text-decoration: none;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem;
+}
 
 .loginbar:focus {
   text-decoration: none;
@@ -4364,6 +4385,10 @@ display:block;
     display: block-inline;
 
   }
+      .navbar-expand-lg .signupbar {
+    display: block-inline;
+
+  }
       .navbar-expand-lg .logoutbar {
     display: block-inline;
   }
@@ -4424,6 +4449,9 @@ display:block;
   display: none;
 }
 .navbar-expand .loginbar {
+  display: block-inline;
+}
+.navbar-expand .signupbar {
   display: block-inline;
 }
 .navbar-expand .logoutbar {
@@ -4487,6 +4515,10 @@ display:block;
   color: rgba(0, 0, 0, 0.55);
   border-color: rgba(0, 0, 0, 0.1);
 }
+.navbar-light .signupbar {
+  color: rgba(0, 0, 0, 0.55);
+  border-color: rgba(0, 0, 0, 0.1);
+}
 .navbar-light .logoutbar {
   color: rgba(0, 0, 0, 0.55);
   border-color: rgba(0, 0, 0, 0.1);
@@ -4531,6 +4563,10 @@ display:block;
   border-color: rgba(255, 255, 255, 0.1);
 }
 .navbar-dark .loginbar {
+  color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.navbar-dark .signupbar {
   color: rgba(255, 255, 255, 0.55);
   border-color: rgba(255, 255, 255, 0.1);
 }
@@ -11425,6 +11461,12 @@ body {
   color: #64a19d;
   border: 1px solid #64a19d;
 }
+#mainNav .signupbar {
+  font-size: 80%;
+  padding: 0.75rem;
+  color: #64a19d;
+  border: 1px solid #64a19d;
+}
 #mainNav .logoutbar {
   font-size: 80%;
   padding: 0.75rem;
@@ -11443,6 +11485,9 @@ body {
 }
 
 #mainNav .loginbar:focus {
+  outline: none;
+}
+#mainNav .signupbar:focus {
   outline: none;
 }
 #mainNav .logoutbar:focus {
@@ -11613,7 +11658,6 @@ body {
   background-attachment: scroll;
   background-size: cover;
 }
-
 .signup-section .form-signup input {
   box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
   padding: 1.25rem 2rem;

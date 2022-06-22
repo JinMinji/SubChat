@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="{% static 'freeapp/post.css' %}">
  <header class="masthead1">
     <div class="container d-flex justify-content-center">
-        <h2 > 호선 게시글 목록 화면</h2>
+        {%%}
+        <h2>{{line_num}}호선 게시글 목록 화면</h2>
 
         <ul id="post_menu" style="list-style-type: none;">
             {% if user.is_authenticated %}

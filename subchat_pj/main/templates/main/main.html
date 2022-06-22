@@ -53,7 +53,7 @@
                                 <div class=" text-center text-lg-left" >
                                     <h1 style="padding: 10px; text-align: center; color:white">{{mainroom.name}}</h1><br><br>
                                     <a href="{% url 'chat:room' mainroom.slug %}" class="px-5 py-3" style="color:white; background-color: #0052A4">채팅방</a>
-                                    <a href="#" class="px-5 py-3 " style="color:white; background-color: #0052A4">게시판</a>
+                                    <a href="{% url 'free:list' mainroom.id %}" class="px-5 py-3 " style="color:white; background-color: #0052A4">게시판</a>
                                 </div>
                             <br><br><br><br><br><br><br><br><br>
                         </div>

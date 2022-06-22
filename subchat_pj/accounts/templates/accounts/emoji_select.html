@@ -6,8 +6,7 @@
 <div style="width:50%; margin:auto; display:grid; grid-template-columns: 70% 20%">
     <div class="emoji_grid" style="text-align:center; display:grid; grid-template-columns: auto auto auto auto auto auto auto">
         {% for emoji in emoji_list %}
-            <span class="emoji" style="border:solid; border-width:1px; width:auto; font-size:30px" onclick="emoji_change(this)">{{emoji|safe}}</span>
-            <input type="hidden" id="emoji{{emoji.id}}" value="{{emoji}}">
+            <span class="emoji" style="border:solid; border-width:1px; width:auto; font-size:30px" onclick="emoji_change(this)">{{emoji|safe}}<input type="hidden" id="emoji{{emoji.id}}" value="{{emoji}}"></span>
         {% endfor %}
     </div>
     <div style="text-align: center;">
