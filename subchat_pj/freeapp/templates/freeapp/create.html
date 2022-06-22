@@ -16,7 +16,11 @@
 				<label>작성자 : </label>
 				<input type="hidden" name="author" id="author" value="{{form.author.value|default_if_none:''}}">{{user}}
 			</div>
+			<div>
+				<label>호선 : </label>
+				<input type="hidden" name="line" id="line" value="{{form.author.value|default_if_none:''}}">{{line}}
 
+			</div>
 			<div>
 	<!--			<label>글 제목 : </label>-->
 				<input type="text" placeholder="제목을 입력하세요." name="title" id="title" value="{{form.title.value|default_if_none:''}}">

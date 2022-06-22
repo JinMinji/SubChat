@@ -13,18 +13,21 @@ class PostList(ListView):
     model = Post
     paginate_by = 10    # 페이지 나누는 부분
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
+        all_post = Post.objects.all().order_by("-id")
+        line_post = all_post.filter(line=self.kwargs['line_num'])
+
         search_keyword = self.request.GET.get("searchword")
-        post_list = Post.objects.all().order_by("-id")
+
         if search_keyword:
             if len(search_keyword) > 1:
-                searched_list = post_list.filter(Q(title__icontains=search_keyword) | Q(contents__icontains=search_keyword))
+                searched_list = line_post.filter(Q(title__icontains=search_keyword) | Q(contents__icontains=search_keyword))
                 return searched_list
 
             else:
                 messages.error(self.request, '검색어는 2글자 이상 입력해주세요.')
 
-        return post_list
+        return line_post
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
