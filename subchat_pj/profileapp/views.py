@@ -1,6 +1,7 @@
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 from freeapp.models import Post, Bookmark
@@ -16,9 +17,12 @@ def mypage(request):
     if request.method == "POST":
         #수정하기
         user_form = CustomUserChangeForm(request.POST, instance=request.user)
-        # print(user_form.year)
         if user_form.is_valid():
             user_form.save()
+            return redirect('/profile/mypage')
+
+        else:
+            print("폼 유효성 검사 실패")
             return redirect('/profile/mypage')
 
     # 로그인 사용자의 작성글 가져오기
@@ -69,6 +73,18 @@ def emoji_modify(request, new_emoji_id):
 
 
 def test(request):
+    if request.method == "POST":
+        # 수정하기
+        user_form = CustomUserChangeForm(request.POST, instance=request.user)
+        print(user_form)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('/profile/mypage')
+
+        else:
+            messages.warning(request, "입력값 형식 오류, 수정할 내용을 확인해주세요.")
+            return redirect('/profile/mypage')
+
     # 로그인 사용자의 작성글 가져오기
     user_id = request.user.id
     my_post_list = Post.objects.all().filter(author_id=user_id)
@@ -93,7 +109,7 @@ def test(request):
         my_emoji = Emoji.objects.get(id=1)
 
     emoji_list = Emoji.objects.all()
-    return render(request, 'profileapp/mypage_bak.html', {'form': form, 'my_emoji': my_emoji, 'my_post_list': my_post_list,
+    return render(request, 'profileapp/mypage.html', {'form': form, 'my_emoji': my_emoji, 'my_post_list': my_post_list,
                                                       'my_bookmark_list': my_bookmark_list})
 
 

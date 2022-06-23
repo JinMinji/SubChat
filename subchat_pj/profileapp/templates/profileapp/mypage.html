@@ -18,22 +18,22 @@
     <div class = "aside" >
         <h2 style="text-align:center;">기본정보 수정</h2>
         <br>
-        <span style="float:right;" onclick="window.open(href='{% url 'profile:change_password'%}','비밀번호변경','width=300,height=300,location=no,status=no,scrollbars=yes');" style="cursor:pointer">비밀번호 변경</span>
+        <span onclick="window.open(href='{% url 'profile:change_password'%}','비밀번호변경','width=400,height=500,location=no,status=no,scrollbars=yes');" style="float:right; cursor:pointer; border: 1px solid #b4b4b4; border-radius: 0.25rem; padding: 5px; margin-bottom:10px">비밀번호 변경</span>
         <br>
         <form method="post" action=".">
          {% csrf_token %}
          {% include "form_errors.html" %}
             <label>ID: </label>
-            <input type="text" name="val" class="form-control input-lg" value="{{form.username.value|default_if_none:''}}" disabled/>
+            <input name="username" id="username" type="text" class="form-control input-lg" value="{{form.username.value|default_if_none:''}}" disabled/>
             <br>
             <label>email: </label>
-            <input type="text" name="email" id="email" class="form-control input-lg" value="{{form.email.value|default_if_none:''}}"/>
+            <input type="email" name="email" id="email" class="form-control input-lg" value="{{form.email.value|default_if_none:''}}"/>
             <br>
             <label>Birth Date : </label>
-            <input type="date" class="form-control input-lg" value="{{form.birth.value|default_if_none:''}}">
+            <input type="date" id="birth" name="birth" class="form-control input-lg" value="{{user.birth|date:'Y-m-d'}}">
             <br>
             <label>Gender : </label>
-            {%if form.gender == 'M'%}
+            {%if form.gender.value == 'M'%}
                 <label class="radio-inline">
                     <input type="radio" name="gender" value="M" id=male checked="True" /> Male
                 </label>
@@ -107,11 +107,8 @@
                     </div>
                 </div>
         </div>
-
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src = "{%static 'profileapp/emoji_select.js'%}"></script>
-
 {% endblock %}

@@ -9,6 +9,7 @@ def signup(request):
     if request.method == 'POST':
         # 회원가입에 필요한 코드
         form = UserForm(request.POST)
+        print(form)
         if form.is_valid():
             year = form.cleaned_data.get("year")
             month = form.cleaned_data.get("month")
