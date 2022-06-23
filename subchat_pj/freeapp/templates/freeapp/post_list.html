@@ -6,14 +6,15 @@
     <div class="container d-flex justify-content-center">
         {% if line_num == 0 %}
         <h2>전체 게시글 목록 화면</h2>
+        {% elif line_num == 10%}
+        <h2>경의중앙선 게시글 목록 화면</h2>
         {% else %}
         <h2>{{line_num}}호선 게시글 목록 화면</h2>
-
         {% endif %}
 
         <ul id="post_menu" style="list-style-type: none;">
             {% if user.is_authenticated %}
-                <li style="float:right; text-align:center;"><button class="button" onclick="location.href='{% url 'free:create' %}'">글쓰기&#9997;</button></li>
+                <li style="float:right; text-align:center;"><button class="button" onclick="location.href='{% url 'free:create' line_num %}'">글쓰기&#9997;</button></li>
             {% else %}
                 <li style="float:right; text-align:center;"><button class="button" onclick="location.href='{% url 'accounts:login' %}'">글쓰기&#9997;</button></li>
             {% endif %}
@@ -29,7 +30,7 @@
                 <div class="search-wrap">
                     <label for="search" class="blind">게시판 내용 검색</label>
                     <input id="search" type="search" name="searchword" placeholder="검색어를 입력해주세요." value="">
-                    <button type="submit" class="btn btn-dark">검색</button>
+                    <button type="submit" class="btn btn-dark" style="margin-top: 24.1px; height:40px;">검색</button>
                 </div>
             </form>
         </div>
@@ -38,6 +39,7 @@
 <div class="pagebottom">
 <div class = "container d-flex justify-content-center" style = "color:#969696   ; ">
     <table style = "width: 100%; text-align:center;">
+        <thead>
         <tr style = "border-bottom: 1px solid #969696;">
             <th>no</th>
             <th>제목</th>
@@ -48,6 +50,8 @@
             <th>신고</th>
             <th>조회수</th>
         </tr>
+        </thead>
+        <tbody>
         {% for post in post_list%}
         <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer; border-bottom: 0.5px solid #bebebe;">
             <td>{{post.id}}</td>
@@ -62,7 +66,9 @@
             <td>{{post.view_cnt}}</td>
         </tr>
         {%endfor%}
+        </tbody>
     </table>
+
 </div>
 
 {% if is_paginated %}

@@ -79,7 +79,7 @@ def post(request, pk):  #게시글 내용 보여주는 곳
     return render(request, 'freeapp/post_read.html', {'post': post, 'comment_list': comments, 'bookmark': bookmark})
 
 
-def create(request):
+def create(request, pk):
     if request.method == "POST":
         # 글쓰기
         form = PostForm(request.POST)

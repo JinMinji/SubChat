@@ -25,7 +25,7 @@
 					<option value="10" {% if form.line.value == 10 %} selected {% else %} {% endif %} >경의중앙선</option>
 				</select>
 				<button type="submit" class="button" >저장하기</button>
-				<button type="button" onclick="location.href='/free/list/'" class="button">돌아가기</button>
+				<button type="button" onclick="location.href='{% url 'free:list' form.line.value %}'" class="button">돌아가기</button>
 			</div>
 		</form>
 	</div>

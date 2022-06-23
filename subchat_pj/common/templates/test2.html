@@ -10,7 +10,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
                     {% if user.is_authenticated %}
-                    <button class="mypagebar " type="button" ><a  href="{% url 'profile:mypage' %}" style="width:80px">{{user}} page <i class="fa fa-user" aria-hidden="true"></i></a></button>
+                    <button class="mypagebar " type="button" ><a  href="{% url 'profile:mypage' %}" style="width:80px">My Page <i class="fa fa-user" aria-hidden="true"></i></a></button>
                     <button class="logoutbar" type="button"><a href="{% url 'accounts:logout' %}">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></button>
 
 
@@ -24,7 +24,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="/main/#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="/main/#projects">Line</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#signup">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/main/#content">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'free:list' %}">자유게시판</a></li>
 
 

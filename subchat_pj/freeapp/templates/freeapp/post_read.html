@@ -8,9 +8,11 @@
 <div class = "title">
     <div class="container d-flex justify-content-center">
     {% if post.line == 0 %}
-      <h2><b>전체 게시판</b></h2>
+        <h2><b>전체 게시판</b></h2>
+    {% elif post.line == 10%}
+        <h2><b>경의 중앙선</b></h2>
     {% else %}
-      <h2><b>{{post.line}}호선</b></h2>
+        <h2><b>{{post.line}}호선</b></h2>
     {% endif %}
     </div>
 </div>
@@ -57,7 +59,7 @@
         <button type="button" class="button" onclick="location.href='{% url 'free:bookmark' post.id %}'">☆</button>
         {% endif %}
      {% endif %}
-     <button type="button" class="button" onclick="location.href='/free/list/'">돌아가기</button>
+     <button type="button" class="button" onclick="location.href='{% url 'free:list' post.line %}'">돌아가기</button>
 </div>
 
 <div id="commentform">

@@ -36,10 +36,14 @@
 }
 
 .buttons{
-    margin-left:33%;
+       margin-left:33%;
     margin-right:33%;
     margin-top:40px;
     display:block;
+
+
+
+
 }
 
 body{
@@ -58,12 +62,4 @@ body{
     display: inline-block;
     font-size: 15px;
     border-radius:10%
-}
-
-#id_line{
-    display: none;
-}
-
-#postform > form > label:nth-child(8){
-    display: none;
 }

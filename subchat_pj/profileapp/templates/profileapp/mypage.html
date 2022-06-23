@@ -54,20 +54,23 @@
         </form>
         </div>
         <div class="section">
-            <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse;" >
+            <div class ="section2" style="overflow-y:auto; height:50%; border-collapse:collapse;" >
                 <th>
-                    <h4 style = "text-align: center; padding-top: 10px; "><span><strong>내가 쓴 글</strong></span></h4>
+                    <h4 style = "text-align: center; padding-top: 10px; color:#5a5a5a; "><span><strong>내가 쓴 글</strong></span></h4>
                 </th>
 
                 <div class = "container2 d-flex justify-content-center">
-                    <table style = "width: 100%; text-align:center; width: 100%; border-bottom: 1px solid black;">
-                        <tr style = "border-bottom: 1px solid black; border-top: 1px solid black;" >
+                    <table style = "width: 100%; text-align:center; width: 100%; border-bottom: 1px solid #cccccc;">
+                        <thead>
+                        <tr style = "border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;" >
                             <th>no</th>
                             <th>제목</th>
                             <th>작성일</th>
                             <th>댓글수</th>
                             <th>조회수</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         {% for post in my_post_list%}
                             <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer; ">
                                 <td>{{post.id}}</td>
@@ -79,23 +82,27 @@
                                 <td>{{post.view_cnt}}</td>
                             </tr>
                         {%endfor%}
+                        </tbody>
                     </table>
                 </div>
             </div>
 
-            <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse; border-top: 1px solid black;">
+            <div class ="section2" style="overflow-y:auto; height:50%; border-collapse:collapse; border-top: 1px solid #cccccc;">
                 <th>
-                    <h4 style = "text-align: center;"><span><strong>북마크 한 글</strong></span></h4>
+                    <h4 style = "text-align: center; color:#5a5a5a"><span><strong>북마크 한 글</strong></span></h4>
                 </th>
                 <div class = "container2 d-flex justify-content-center" >
-                    <table style = "text-align:center; width: 100%; border-bottom: 1px solid black;">
-                        <tr style = "border-bottom: 1px solid black; border-top: 1px solid black;">
+                    <table style = "text-align:center; width: 100%; border-bottom: 1px solid #cccccc;">
+                        <thead>
+                        <tr style = "border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;">
                             <th>no</th>
                             <th>제목</th>
                             <th>작성일</th>
                             <th>댓글수</th>
                             <th>조회수</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         {% for post in my_bookmark_list%}
                             <tr onclick="location.href='/free/post/{{post.id}}'" style="cursor:pointer">
                                 <td>{{post.id}}</td>
@@ -107,6 +114,7 @@
                                 <td>{{post.view_cnt}}</td>
                             </tr>
                         {%endfor%}
+                        </tbody>
                         </table>
                     </div>
                 </div>
