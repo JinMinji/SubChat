@@ -63,11 +63,14 @@ body{
 .comment{
     width:40%;
     margin: auto;
-    border-color:rgb(160 140 161);
-    border-radius: 10px 10px / 10px 10px;
     overflow-y: auto;
     height:200px;
     min-width:400px;
+}
+
+.each_comment {
+    border-bottom:1px solid #cccccc;
+    margin-bottom:10px;
 }
 
 #commentform{

@@ -77,13 +77,15 @@
 
 <div class="comment">
     {% for comment in comment_list %}
-      <div>
-         <h6>{{comment.author}} : {{comment.contents}}</h6>
-      </div>
-      <label>{{comment.create_date}}</label>
-      {% if comment.author_id == user.id %}
-         <a href="{% url 'free:comment_delete' comment.id %}">삭제</a>
-      {% endif %}
+    <div class="each_comment">
+          <div>
+             <h6><strong>{{comment.author}} : {{comment.contents}}</strong></h6>
+          </div>
+          <span style="font-size:10pt; color:gray;">{{comment.create_date}}</span>
+          {% if comment.author_id == user.id %}
+             <a href="{% url 'free:comment_delete' comment.id %}">삭제</a>
+          {% endif %}
+    </div>
     {% endfor %}
 </div>
 
