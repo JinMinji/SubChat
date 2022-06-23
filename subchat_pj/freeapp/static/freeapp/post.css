@@ -30,10 +30,14 @@ tr{
 ul.pagination {
     list-style-type: none;
     margin: 0;
+    margin-top: 10px;
     padding: 0;
     overflow: hidden;
     background-color: transparent;
-    text-align: center;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 li.page-item {

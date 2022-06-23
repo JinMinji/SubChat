@@ -13,9 +13,9 @@
 
         <ul id="post_menu" style="list-style-type: none;">
             {% if user.is_authenticated %}
-                <li style="float:right; text-align:center;"><button onclick="location.href='{% url 'free:create' %}'">글쓰기&#9997;</button></li>
+                <li style="float:right; text-align:center;"><button class="button" onclick="location.href='{% url 'free:create' %}'">글쓰기&#9997;</button></li>
             {% else %}
-                <li style="float:right; text-align:center;"><button onclick="location.href='{% url 'accounts:login' %}'">글쓰기&#9997;</button></li>
+                <li style="float:right; text-align:center;"><button class="button" onclick="location.href='{% url 'accounts:login' %}'">글쓰기&#9997;</button></li>
             {% endif %}
         </ul>
 
@@ -95,6 +95,7 @@
         </li>
     {% endif %}
 </ul>
+
 {% endif %}
 {% if messages %}
     {{ message.tag }}

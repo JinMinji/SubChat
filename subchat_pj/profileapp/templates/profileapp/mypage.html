@@ -6,7 +6,7 @@
 
 <body></body>
 <div class="mypage">
-    <div class = "page" >
+    <div class = "page">
         <div class="page2">
             <div class="box" style="background: #fff;">
                 <div onclick="window.open(href='{% url 'profile:emoji'%}','이모지변경','width=600,height=700,location=no,status=no,scrollbars=yes');" style="text-align: center; font-size:70pt; cursor:pointer">{{my_emoji|safe}}</div>
@@ -16,21 +16,24 @@
     </div>
 
     <div class = "aside" >
-        <h2>기본정보 수정</h2>
-        <span onclick="window.open(href='{% url 'profile:change_password'%}','비밀번호변경','width=300,height=300,location=no,status=no,scrollbars=yes');" style="cursor:pointer">비밀번호 변경</span>
+        <h2 style="text-align:center;">기본정보 수정</h2>
+        <br>
+        <span style="float:right;" onclick="window.open(href='{% url 'profile:change_password'%}','비밀번호변경','width=300,height=300,location=no,status=no,scrollbars=yes');" style="cursor:pointer">비밀번호 변경</span>
+        <br>
         <form method="post" action=".">
          {% csrf_token %}
          {% include "form_errors.html" %}
             <label>ID: </label>
-            <label>{{form.username.value|default_if_none:''}}</label>
+            <input type="text" name="val" class="form-control input-lg" value="{{form.username.value|default_if_none:''}}" disabled/>
             <br>
             <label>email: </label>
             <input type="text" name="email" id="email" class="form-control input-lg" value="{{form.email.value|default_if_none:''}}"/>
+            <br>
             <label>Birth Date : </label>
-            <input type="date" class="form-control input-lg" id="birth" name="birth" value="{{user.birth|date:'Y-m-d'}}">
+            <input type="date" class="form-control input-lg" value="{{form.birth.value|default_if_none:''}}">
             <br>
             <label>Gender : </label>
-            {%if form.gender.value == 'M'%}
+            {%if form.gender == 'M'%}
                 <label class="radio-inline">
                     <input type="radio" name="gender" value="M" id=male checked="True" /> Male
                 </label>
@@ -47,8 +50,9 @@
             {%endif%}
             <br>
             <br>
-            <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">수정하기</button>
+            <button class="btn btn-lg btn-primary btn-block signup-btn " style = "margin-right: 35%;" type="submit">수정하기</button>
         </form>
+        </div>
         <div class="section">
             <div class ="section2" style="overflow-y:scroll; height:50%; border-collapse:collapse;" >
                 <th>
@@ -68,7 +72,6 @@
                                 <td>{{post.id}}</td>
                                 <td style="text-align:left; min-width:150px">
                                     <span><strong>{{post.title}}</strong></span>
-                                    <br><span>{{post.contents}}</span>
                                 </td>
                                 <td style="max-width:100px">{{post.create_date|date:'y.m.d H:i'}}</td>
                                 <td>{{post.view_cnt}}</td>
@@ -95,7 +98,6 @@
                                 <td>{{post.id}}</td>
                                 <td style="text-align:left; min-width:150px">
                                     <span><strong>{{post.title}}</strong></span>
-                                    <br><span>{{post.contents}}</span>
                                 </td>
                                 <td style="max-width:100px">{{post.create_date|date:'y.m.d H:i'}}</td>
                                 <td>{{post.view_cnt}}</td>
@@ -105,7 +107,7 @@
                     </div>
                 </div>
         </div>
-    </div>
+
 </div>
 
 
