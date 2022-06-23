@@ -27,12 +27,14 @@ SECRET_KEY = 'django-insecure-^p8&!4rl4x@0e@v9(bj3oo6wg9k%pw18-7@751o63(ereyghzn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'chatapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,10 +44,8 @@ INSTALLED_APPS = [
     'common',
     'main',
     'accounts',
-    'chatapp',
     'freeapp',
     'profileapp',
-    'channels',
     'rest_framework',
     'django_summernote',
 ]
