@@ -63,8 +63,9 @@
                     <table style = "width: 100%; text-align:center; width: 100%; border-bottom: 1px solid black;">
                         <tr style = "border-bottom: 1px solid black; border-top: 1px solid black;" >
                             <th>no</th>
-                            <th>질문</th>
+                            <th>제목</th>
                             <th>작성일</th>
+                            <th>댓글수</th>
                             <th>조회수</th>
                         </tr>
                         {% for post in my_post_list%}
@@ -74,6 +75,7 @@
                                     <span><strong>{{post.title}}</strong></span>
                                 </td>
                                 <td style="max-width:100px">{{post.create_date|date:'y.m.d H:i'}}</td>
+                                <td>{{post.comment_set.all.count}}</td>
                                 <td>{{post.view_cnt}}</td>
                             </tr>
                         {%endfor%}
@@ -89,8 +91,9 @@
                     <table style = "text-align:center; width: 100%; border-bottom: 1px solid black;">
                         <tr style = "border-bottom: 1px solid black; border-top: 1px solid black;">
                             <th>no</th>
-                            <th>질문</th>
+                            <th>제목</th>
                             <th>작성일</th>
+                            <th>댓글수</th>
                             <th>조회수</th>
                         </tr>
                         {% for post in my_bookmark_list%}
@@ -100,6 +103,7 @@
                                     <span><strong>{{post.title}}</strong></span>
                                 </td>
                                 <td style="max-width:100px">{{post.create_date|date:'y.m.d H:i'}}</td>
+                                <td>{{post.comment_set.all.count}}</td>
                                 <td>{{post.view_cnt}}</td>
                             </tr>
                         {%endfor%}
