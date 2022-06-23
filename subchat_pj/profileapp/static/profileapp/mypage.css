@@ -103,3 +103,14 @@ button{
     outline: 0;
     box-shadow: 0 0 0 0.25rem;
 }
+
+input{
+border-radius: 0.25rem;
+}
+.passwordchange{
+    position: relative;
+    padding: 3rem 0 2rem 0;
+    margin-left:3%;
+    margin-right:15%;
+
+}

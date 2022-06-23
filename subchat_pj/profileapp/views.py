@@ -27,14 +27,15 @@ def mypage(request):
 
     # 로그인 사용자의 작성글 가져오기
     user_id = request.user.id
-    my_post_list = Post.objects.all().filter(author_id=user_id)
+    my_post_list = Post.objects.all().order_by("-id").filter(author_id=user_id)
 
     # 로그인 사용자의 북마크한 글 가져오기
     my_bookmarks = Bookmark.objects.all().filter(user_id=user_id).values("post_id")
     post_id_list = list()
     for dic in my_bookmarks:
         post_id_list.append(dic["post_id"])
-    all_post = Post.objects.all()
+
+    all_post = Post.objects.all().order_by("-id")
     my_bookmark_list = list()
     for post in all_post:
         if post.id in post_id_list:
