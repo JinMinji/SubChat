@@ -68,7 +68,7 @@ def post(request, pk):  #게시글 내용 보여주는 곳
     post = Post.objects.get(id=pk)
     post.view_cnt += 1
     post.save()
-    qs = Comment.objects.all()
+    qs = Comment.objects.all().order_by("-id")
     comments = qs.filter(Q(post_id=pk))
     bookmarks = Bookmark.objects.all()
     tmp = bookmarks.filter(post_id=pk, user_id=request.user.id)

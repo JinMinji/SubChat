@@ -10,12 +10,17 @@
 		<h3> 글쓰기 </h3>
 	</div>
 	<div id="postform">
-
 		<form method="post" action="." >
 			{{form}}
 			{% csrf_token %}
 			<div class="buttons">
-				<button type="submit" class="button" >저장하기</button>
+				<select name="line" id="line" style="height:30px;">
+					<option value=1>1호선</option><option value="2">2호선</option><option value="3">3호선</option>
+					<option value=4>4호선</option><option value="5">5호선</option><option value="6">6호선</option>
+					<option value="7">7호선</option><option value="8">8호선</option><option value="9">9호선</option>
+					<option value="10">경의 중앙</option>
+				</select>
+				<button type="submit" class="button" > 저장하기 </button>
 				<button type="button" onclick="location.href='/free/list/'" class="button">돌아가기</button>
 			</div>
 		</form>

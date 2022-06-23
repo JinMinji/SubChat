@@ -32,19 +32,16 @@ body{
 }
 
 .author{
+    width = 80%;
     margin-top:140px;
-    margin-left:50px;
+    margin-left:20%;
 }
 
 .contents{
     margin-top:200px;
-    margin-left:33%;
-    margin-right:33%;
-    width:34%;
+    width:40%;
     margin-left:auto;
     margin-right:auto;
-    border:5px solid;
-    border-style: inset;
     border-color:rgb(207 186 208);
     border-radius: 10px 10px / 10px 10px;
     height:500px;
@@ -64,32 +61,30 @@ body{
 }
 
 .comment{
-    margin-left:33%;
-    margin-right:33%;
-    width:34%;
+    width:40%;
     margin: auto;
-    border:5px solid;
-    border-style: inset;
     border-color:rgb(160 140 161);
     border-radius: 10px 10px / 10px 10px;
-    overflow-y:scroll;
-    height:150px;
+    overflow-y: auto;
+    height:200px;
     min-width:400px;
 }
 
 #commentform{
-    margin-left:33%;
+    width:40%;
+    margin: auto;
+    margin-bottom:10px;
 }
 
 .cmt_contents{
-    width:40%;
+    width:87%;
     height:30px;
     display:block;
 }
 
 .cmt-btn{
     float:right;
-    margin-right:49%;
+    margin-right:3%;
     margin-top:-30px;
     width:11%;
 }
@@ -98,4 +93,10 @@ body{
     margin-top:-20px;
     margin-left:18%;
     margin-bottom:-140px;
+}
+
+.contents-t {
+    font-size:30pt;
+    font-style:italic;
+    font-weight:bold;
 }

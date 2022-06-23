@@ -59,3 +59,11 @@ body{
     font-size: 15px;
     border-radius:10%
 }
+
+#id_line{
+    display: none;
+}
+
+#postform > form > label:nth-child(8){
+    display: none;
+}

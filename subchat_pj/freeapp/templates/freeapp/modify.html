@@ -12,6 +12,18 @@
 			{{form}}
 			{% csrf_token %}
 			<div class="buttons">
+				<select name="line" id="line" style="height:30px;">
+					<option value="1" {% if form.line.value == 1 %} selected {% else %} {% endif %} >1호선</option>
+					<option value="2" {% if form.line.value == 2 %} selected {% else %} {% endif %} >2호선</option>
+					<option value="3" {% if form.line.value == 3 %} selected {% else %} {% endif %} >3호선</option>
+					<option value="4" {% if form.line.value == 4 %} selected {% else %} {% endif %} >4호선</option>
+					<option value="5" {% if form.line.value == 5 %} selected {% else %} {% endif %} >5호선</option>
+					<option value="6" {% if form.line.value == 6 %} selected {% else %} {% endif %} >6호선</option>
+					<option value="7" {% if form.line.value == 7 %} selected {% else %} {% endif %} >7호선</option>
+					<option value="8" {% if form.line.value == 8 %} selected {% else %} {% endif %} >8호선</option>
+					<option value="9" {% if form.line.value == 9 %} selected {% else %} {% endif %} >9호선</option>
+					<option value="10" {% if form.line.value == 10 %} selected {% else %} {% endif %} >경의중앙선</option>
+				</select>
 				<button type="submit" class="button" >저장하기</button>
 				<button type="button" onclick="location.href='/free/list/'" class="button">돌아가기</button>
 			</div>

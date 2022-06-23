@@ -6,80 +6,62 @@
 <body></body>
 
 <div class = "title">
-   <div class="container d-flex justify-content-center">
-      <h2 style="text-align:center;"> 글 읽기 </h2>
-   </div>
+    <div class="container d-flex justify-content-center">
+    {% if post.line == 0 %}
+      <h2><b>전체 게시판</b></h2>
+    {% else %}
+      <h2><b>{{post.line}}호선</b></h2>
+    {% endif %}
+    </div>
 </div>
+
 <div class = "author">
    <div id="post" >
-      <form method="post" action=".">
-         <div style="float:left">
-            <label>작성자 : </label>
-            <span>{{post.author}}</span>
-            <p>조회수 : {{post.view_cnt}}</p>
-            <p>&#128077; : {{post.like_set.all.count}} &#128078; : {{post.hate_set.all.count}}</p>
-
-             <div>
-               {% if post.line == 0 %}
-                  <strong>전체 게시판</strong>
-               {% else %}
-                  <strong>{{post.line}}호선</strong>
-               {% endif %}
-             </div>
-         </div>
-      </form>
+     <div style="float:left">
+        <label>작성자 : </label>
+        <strong>{{post.author}}</strong>&emsp;
+         <span>조회수 : </span><strong>{{post.view_cnt}}</strong>&emsp;
+         <span>&#128077; : </span> <strong>{{post.like_set.all.count}}</strong><span>&#128078; : </span><strong>{{post.hate_set.all.count}}</strong>
+     </div>
    </div>
 </div>
+
 <div class = "contents">
-      <form method="post" action=".">
-         <div class="contents-t">
-         <label>글 제목 : </label>
-         <label>{{post.title}}</label>
-             <hr align="center" width="100%" size="5">
-         </div>
-         <div class="contents-c">
-      <!--         <label>글 내용 : </label>-->
-            <label>{{post.contents|safe}}</label>
-         </div>
-      </form>
+    <h5 style="text-align:center; font-style:italic"> POST </h5>
+     <div class="contents-t">
+     <label>{{post.title}}</label>
+         <hr align="center" width="100%" size="5">
+     </div>
+     <div class="contents-c">
+  <!--         <label>글 내용 : </label>-->
+        <label>{{post.contents|safe}}</label>
+     </div>
 </div>
+
 <div class = "buttons" style="float:right">
-      <form method="post" action=".">
-         {% if user.id == post.author_id%}
-            <button type="button" class="button" onclick="location.href='/free/modify/{{post.id}}'">수정하기</button>
-            <button type="button" class="button" onclick="location.href='/free/delete/{{post.id}}'">삭제하기</button>
-         {% else %}
-            {% if user.is_authenticated %}
-            <button type="button" onclick="location.href='/free/post/{{post.id}}/like'">&#128077;</button>
-               <button type="button" onclick="location.href='/free/post/{{post.id}}/hate'">&#128078;</button>
-            <button type="button" class="button" onclick="window.open(href='{% url 'free:report' post.id %}','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">신고하기</button>
-            {% endif %}
-         {% endif %}
+     {% if user.id == post.author_id%}
+        <button type="button" class="button" onclick="location.href='/free/modify/{{post.id}}'">수정하기</button>
+        <button type="button" class="button" onclick="location.href='/free/delete/{{post.id}}'">삭제하기</button>
+     {% else %}
+        {% if user.is_authenticated %}
+        <button type="button" onclick="location.href='/free/post/{{post.id}}/like'">&#128077;</button>
+           <button type="button" onclick="location.href='/free/post/{{post.id}}/hate'">&#128078;</button>
+        <button type="button" class="button" onclick="window.open(href='{% url 'free:report' post.id %}','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">신고하기</button>
+        {% endif %}
+     {% endif %}
 
-         {% if user.is_authenticated%}
-            {% if bookmark %}
-            <button type="button" class="button" onclick="location.href='{% url 'free:bookmark' post.id %}'">★</button>
-            {% else %}
-            <button type="button" class="button" onclick="location.href='{% url 'free:bookmark' post.id %}'">☆</button>
-            {% endif %}
-         {% endif %}
-         <button type="button" class="button" onclick="location.href='/free/list/'">돌아가기</button>
-   </form>
+     {% if user.is_authenticated%}
+        {% if bookmark %}
+        <button type="button" class="button" onclick="location.href='{% url 'free:bookmark' post.id %}'">★</button>
+        {% else %}
+        <button type="button" class="button" onclick="location.href='{% url 'free:bookmark' post.id %}'">☆</button>
+        {% endif %}
+     {% endif %}
+     <button type="button" class="button" onclick="location.href='/free/list/'">돌아가기</button>
 </div>
 
-<div class="comment">
+<div id="commentform">
     <h5> 댓글 </h5>
-    {% for comment in comment_list %}
-      <div>
-         <h6>{{comment.author}} : {{comment.contents}}</h6>
-      </div>
-      <label>{{comment.create_date}}</label>
-      {% if comment.author_id == user.id %}
-         <a href="{% url 'free:comment_delete' comment.id %}">삭제</a>
-      {% endif %}
-    {% endfor %}
-</div>
-    <div id="commentform">
       <form method="post" action=".">
          {% csrf_token %}
          {% include "form_errors.html" %}
@@ -90,6 +72,19 @@
          {% endif %}
       </form>
     </div>
+
+<div class="comment">
+    {% for comment in comment_list %}
+      <div>
+         <h6>{{comment.author}} : {{comment.contents}}</h6>
+      </div>
+      <label>{{comment.create_date}}</label>
+      {% if comment.author_id == user.id %}
+         <a href="{% url 'free:comment_delete' comment.id %}">삭제</a>
+      {% endif %}
+    {% endfor %}
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
