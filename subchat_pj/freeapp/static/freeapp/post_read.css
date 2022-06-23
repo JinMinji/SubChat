@@ -1,16 +1,28 @@
+.button {
+    background-color: #d2c8d3;
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius:10%
+}
 
 .readpost {
-  position: relative;
-  width: 100%;
-  padding: 8rem 0 2rem 0;
+    position: relative;
+    width: 100%;
+    padding: 8rem 0 2rem 0;
+}
 
-}
 body{
-background: rgb(255,255,255);
-background: linear-gradient(0deg, rgba(255,255,255,1) 86%, rgba(154,133,156,1) 100%);
-height:967px;
-background-repeat:no-repeat;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 86%, rgba(154,133,156,1) 100%);
+    height:967px;
+    background-repeat:no-repeat;
 }
+
 .title{
     margin-left:33%;
     margin-right:33%;
@@ -18,25 +30,72 @@ background-repeat:no-repeat;
     position: relative;
     top:150px;
 }
+
 .author{
-  margin-top:140px
+    margin-top:140px;
+    margin-left:50px;
 }
+
 .contents{
-  margin-top:200px;
-  margin-left:33%;
-  margin-right:33%;
-  border:1px solid;
-  height:500px;
+    margin-top:200px;
+    margin-left:33%;
+    margin-right:33%;
+    width:34%;
+    margin-left:auto;
+    margin-right:auto;
+    border:5px solid;
+    border-style: inset;
+    border-color:rgb(207 186 208);
+    border-radius: 10px 10px / 10px 10px;
+    height:500px;
+    min-width:400px;
 }
+
 .buttons{
-  margin-top:-590px;
-  margin-right:20px;
+    margin-top:-590px;
+    margin-right:20px;
+    margin-left:20px;
 }
+
 .return-b{
-  margin-top:20px;
-  float:right;
-  margin-right:10px
+    margin-top:20px;
+    float:right;
+    margin-right:10px
 }
+
 .comment{
-  margin-left:10px;
+    margin-left:33%;
+    margin-right:33%;
+    width:34%;
+    margin: auto;
+    border:5px solid;
+    border-style: inset;
+    border-color:rgb(160 140 161);
+    border-radius: 10px 10px / 10px 10px;
+    overflow-y:scroll;
+    height:150px;
+    min-width:400px;
+}
+
+#commentform{
+    margin-left:33%;
+}
+
+#contents{
+    width:40%;
+    height:30px;
+    display:block;
+}
+
+.cmt-btn{
+    float:right;
+    margin-right:49%;
+    margin-top:-30px;
+    width:11%;
+}
+
+.all-line{
+    margin-top:-20px;
+    margin-left:18%;
+    margin-bottom:-140px;
 }
