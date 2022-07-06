@@ -17,9 +17,11 @@ class PostList(ListView):
         all_post = Post.objects.all().order_by("-id")
 
         if self.kwargs['line_num'] == 0:
-            line_post = all_post
+            # 신고 개수 5미만 게시물만 표시
+            line_post = all_post.filter(report_cnt__lt=5)
         else:
             line_post = all_post.filter(line=self.kwargs['line_num'])
+            line_post = line_post.filter(report_cnt__lt=5)
 
         search_keyword = self.request.GET.get("searchword")
         if search_keyword:
